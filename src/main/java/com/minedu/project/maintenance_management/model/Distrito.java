@@ -12,6 +12,10 @@ public class Distrito {
 	
 	@Column (name = "NOM_DIS", length = 40, nullable = false)
 	private String nomDis;
+	
+	@ManyToOne
+	@JoinColumn (name = "COD_PRO", nullable = false)
+	private Provincia provincia;
 
 	public Distrito() {
 		// TODO Auto-generated constructor stub
@@ -31,5 +35,13 @@ public class Distrito {
 
 	public void setNomDis(String nomDis) {
 		this.nomDis = nomDis;
+	}
+	
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
 	}
 }

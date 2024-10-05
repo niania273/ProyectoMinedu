@@ -8,12 +8,14 @@ import jakarta.persistence.*;
 public class SolicitudEquipo {
 	
 	@Id
-	@Column (name = "COD_SOL", length = 5, nullable = false)
-	private String codSol;
+	@ManyToOne
+    @JoinColumn(name = "COD_SOL", nullable = false)
+    private Solicitud solicitud;
 	
 	@Id
-	@Column (name = "COD_EQU", length = 5, nullable = false)
-	private String codEqu;
+	@ManyToOne
+    @JoinColumn(name = "COD_EQU", nullable = false)
+    private Equipo equipo;
 	
 	@Column (name = "CAN_EQU", nullable = false)
 	private Byte canEqu;
@@ -22,21 +24,29 @@ public class SolicitudEquipo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getCodSol() {
-		return codSol;
+	public Solicitud getSolicitud() {
+		return solicitud;
 	}
 
-	public void setCodSol(String codSol) {
-		this.codSol = codSol;
+
+
+	public void setSolicitud(Solicitud solicitud) {
+		this.solicitud = solicitud;
 	}
 
-	public String getCodEqu() {
-		return codEqu;
+
+
+	public Equipo getEquipo() {
+		return equipo;
 	}
 
-	public void setCodEqu(String codEqu) {
-		this.codEqu = codEqu;
+
+
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
 	}
+
+
 
 	public Byte getCanEqu() {
 		return canEqu;

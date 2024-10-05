@@ -16,11 +16,17 @@ public class Solicitud {
 	@JoinColumn (name = "COD_SOLI", nullable = false)
 	private Solicitante solicitante;
 	
-	@Column (name = "DES_SOL", length = 60, nullable = true)
+	@Column (name = "DES_SOL", length = 100, nullable = true)
 	private String desSol;
+	
+	@Column (name = "CAT_SOL", length = 60, nullable = false)
+	private String catSol;
 	
 	@Column (name = "NIV_CLA", length = 1, nullable = true)
 	private String nivCla;
+	
+	@Column (name = "NIV_PRI", length = 50, nullable = false)
+	private String nivPri;
 	
 	@Column (name = "EST_SOL", length = 50, nullable = false)
 	private String estSol;
@@ -31,7 +37,7 @@ public class Solicitud {
 	@Column (name = "FEC_ACT", length = 5, nullable = false)
 	private Date fecAct;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn (name = "COD_EMP", nullable = false)
 	private Empleado empleado;
 
@@ -62,6 +68,14 @@ public class Solicitud {
 	public void setDesSol(String desSol) {
 		this.desSol = desSol;
 	}
+	
+	public String getCatSol() {
+		return catSol;
+	}
+
+	public void setCatSol(String catSol) {
+		this.catSol = catSol;
+	}
 
 	public String getNivCla() {
 		return nivCla;
@@ -69,6 +83,14 @@ public class Solicitud {
 
 	public void setNivCla(String nivCla) {
 		this.nivCla = nivCla;
+	}
+	
+	public String getNivPri() {
+		return nivPri;
+	}
+
+	public void setNivPri(String nivPri) {
+		this.nivPri = nivPri;
 	}
 
 	public String getEstSol() {
@@ -101,5 +123,6 @@ public class Solicitud {
 
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
-	}
+	}	
+	
 }

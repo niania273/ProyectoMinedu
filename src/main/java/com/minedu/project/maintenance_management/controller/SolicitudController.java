@@ -1,28 +1,32 @@
 package com.minedu.project.maintenance_management.controller;
 
-import java.util.List;
-import java.util.Optional;
+/*import java.util.List;
+import java.util.Optional;*/
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.minedu.project.maintenance_management.model.Solicitud;
+/*import com.minedu.project.maintenance_management.model.Solicitud;*/
 import com.minedu.project.maintenance_management.service.SolicitudService;
 
-@RestController
-@RequestMapping("solicitudes")
+@Controller
+@RequestMapping("/solicitudes")
 public class SolicitudController {
 	
 	@Autowired
-	private SolicitudService solicitudService;
+	private SolicitudService service;
 	
 	@GetMapping
-    public List<Solicitud> getAllSubjects() {
-        return solicitudService.findAllSolicitudes();
-    }
+	public String listSolicitudes(Model model) {
+		model.addAttribute("lstSolicitudes", service.findAllSolicitudes());
+		return "Solicitudes";
+	}
+	/*
 
     @GetMapping("/{id}")
-    public Optional<Solicitud> getSubjectById(@PathVariable String id) {
+    public Optional<Solicitud> getSolicitudById(@PathVariable String id) {
         return solicitudService.findSolicitudById(id);
     }
 
@@ -44,5 +48,5 @@ public class SolicitudController {
     @DeleteMapping("/{id}")
     public void deleteSubject(@PathVariable String id) {
         solicitudService.deleteSolicitud(id);
-    }
+    }*/
 }

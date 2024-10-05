@@ -6,25 +6,25 @@ import jakarta.persistence.*;
 @Table (name = "REQUERIMIENTO_INDEPENDIENTE	")
 public class RequerimientoIndependiente extends Requerimiento{
 	
-	@Column (name = "MON_EST", nullable = true)
-	private double monEst;
+	@Column (name = "PRI_REQ", length = 50, nullable = true)
+	private double priReq;
 	
-	@Column (name = "CON_REQ", length = 80, nullable = true)
-	private String conReq;
+	@Column (name = "REC_REQ", length = 50, nullable = true)
+	private String recReq;
 
-	public double getMonEst() {
-		return monEst;
+	public double getPriReq() {
+		return priReq;
 	}
 
-	public void setMonEst(double monEst) {
-		this.monEst = monEst;
+	public void setPriReq(double priReq) {
+		this.priReq = priReq;
 	}
 
-	public String getConReq() {
-		return conReq;
+	public String getRecReq() {
+		return recReq;
 	}
 
-	public void setConReq(String conReq) {
-		this.conReq = conReq;
+	public void setRecReq(String recReq) {
+		this.recReq = recReq;
 	}
 }

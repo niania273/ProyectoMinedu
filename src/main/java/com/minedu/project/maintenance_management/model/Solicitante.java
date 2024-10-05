@@ -19,7 +19,10 @@ public class Solicitante {
 	@Column (name = "APE_SOLI", length = 60, nullable = false)
 	private String apeSoli;
 	
-	@Column (name = "TEL_SOLI", length = 9, nullable = false)
+	@Column (name = "EMA_SOLI", length = 80, nullable = true)
+	private String emaSoli;
+	
+	@Column (name = "TEL_SOLI", length = 9, nullable = true)
 	private String telSoli;
 	
 	@OneToOne
@@ -61,6 +64,14 @@ public class Solicitante {
 	public void setApeSoli(String apeSoli) {
 		this.apeSoli = apeSoli;
 	}
+	
+	public String getEmaSoli() {
+		return emaSoli;
+	}
+
+	public void setEmaSoli(String emaSoli) {
+		this.emaSoli = emaSoli;
+	}
 
 	public String getTelSoli() {
 		return telSoli;
@@ -77,4 +88,5 @@ public class Solicitante {
 	public void setInstitucion(Institucion institucion) {
 		this.institucion = institucion;
 	}
+	
 }

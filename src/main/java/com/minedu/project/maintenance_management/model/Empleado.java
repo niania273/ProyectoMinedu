@@ -24,13 +24,13 @@ public class Empleado {
 	@Column (name = "EMA_EMP", length = 80, nullable = true)
 	private String emaEmp;
 	
-	@Column (name = "FEC_EMP", nullable = true)
+	@Column (name = "FEC_NAC_EMP", nullable = true)
 	private Date fecNacEmp;
 	
 	@Column (name = "TEL_EMP", length = 9, nullable = true)
 	private String telEmp;
 	
-	@Column (name = "SEXO_EMP", length = 1, nullable = true)
+	@Column (name = "SEX_EMP", length = 1, nullable = true)
 	private String sexoEmp;
 
 	
