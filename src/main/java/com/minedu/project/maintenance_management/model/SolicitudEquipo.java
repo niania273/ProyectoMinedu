@@ -28,25 +28,17 @@ public class SolicitudEquipo {
 		return solicitud;
 	}
 
-
-
 	public void setSolicitud(Solicitud solicitud) {
 		this.solicitud = solicitud;
 	}
-
-
 
 	public Equipo getEquipo() {
 		return equipo;
 	}
 
-
-
 	public void setEquipo(Equipo equipo) {
 		this.equipo = equipo;
 	}
-
-
 
 	public Byte getCanEqu() {
 		return canEqu;

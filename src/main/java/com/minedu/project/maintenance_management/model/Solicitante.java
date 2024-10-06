@@ -24,10 +24,6 @@ public class Solicitante {
 	
 	@Column (name = "TEL_SOLI", length = 9, nullable = true)
 	private String telSoli;
-	
-	@OneToOne
-	@JoinColumn (name = "COD_INS", nullable = false)
-	private Institucion institucion;
 
 	public Solicitante() {
 		// TODO Auto-generated constructor stub
@@ -79,14 +75,6 @@ public class Solicitante {
 
 	public void setTelSoli(String telSoli) {
 		this.telSoli = telSoli;
-	}
-
-	public Institucion getInstitucion() {
-		return institucion;
-	}
-
-	public void setInstitucion(Institucion institucion) {
-		this.institucion = institucion;
 	}
 	
 }

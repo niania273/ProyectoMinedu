@@ -22,9 +22,6 @@ public class Solicitud {
 	@Column (name = "CAT_SOL", length = 60, nullable = false)
 	private String catSol;
 	
-	@Column (name = "NIV_CLA", length = 1, nullable = true)
-	private String nivCla;
-	
 	@Column (name = "NIV_PRI", length = 50, nullable = false)
 	private String nivPri;
 	
@@ -36,10 +33,6 @@ public class Solicitud {
 	
 	@Column (name = "FEC_ACT", length = 5, nullable = false)
 	private Date fecAct;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn (name = "COD_EMP", nullable = false)
-	private Empleado empleado;
 
 	public Solicitud() {
 		// TODO Auto-generated constructor stub
@@ -76,14 +69,6 @@ public class Solicitud {
 	public void setCatSol(String catSol) {
 		this.catSol = catSol;
 	}
-
-	public String getNivCla() {
-		return nivCla;
-	}
-
-	public void setNivCla(String nivCla) {
-		this.nivCla = nivCla;
-	}
 	
 	public String getNivPri() {
 		return nivPri;
@@ -116,13 +101,5 @@ public class Solicitud {
 	public void setFecAct(Date fecAct) {
 		this.fecAct = fecAct;
 	}
-
-	public Empleado getEmpleado() {
-		return empleado;
-	}
-
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
-	}	
 	
 }

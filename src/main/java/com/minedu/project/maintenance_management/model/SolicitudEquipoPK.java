@@ -8,35 +8,35 @@ public class SolicitudEquipoPK implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String codSol;
-	private String codEqu;
+	private String solicitud;
+	private String equipo;
 	
 	public SolicitudEquipoPK() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public String getCodSol() {
-		return codSol;
-	}
-
-	public void setCodSol(String codSol) {
-		this.codSol = codSol;
-	}
-
-	public String getCodEqu() {
-		return codEqu;
-	}
-
-	public void setCodEqu(String codEqu) {
-		this.codEqu = codEqu;
-	}
 	
-	 @Override
+	 public String getSolicitud() {
+		return solicitud;
+	}
+
+	public void setSolicitud(String solicitud) {
+		this.solicitud = solicitud;
+	}
+
+	public String getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(String equipo) {
+		this.equipo = equipo;
+	}
+
+	@Override
 	    public boolean equals(Object obj) {
 	        if (obj instanceof SolicitudEquipoPK) {
 	        	SolicitudEquipoPK spk = (SolicitudEquipoPK) obj;
 	        	
-	        	return codSol.equals(spk.codSol) && codEqu.equals(spk.codEqu);
+	        	return solicitud.equals(spk.solicitud) && equipo.equals(spk.equipo);
 	        } else {
 	        	return false;
 	        }
@@ -44,6 +44,6 @@ public class SolicitudEquipoPK implements Serializable{
 
 	    @Override
 	    public int hashCode() {
-	        return new String(codSol + codEqu).hashCode();
+	        return new String(solicitud + equipo).hashCode();
 	    }
 }

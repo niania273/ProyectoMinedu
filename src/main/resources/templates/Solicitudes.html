@@ -14,20 +14,17 @@
 		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        <li class="nav-item">
-	          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+	          <a class="nav-link active" aria-current="page" th:href="@{/}">Inicio</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">Solicitudes</a>
+	          <a class="nav-link" th:href="@{/solicitudes}">Solicitudes</a>
 	        </li>
-	        <li class="nav-item dropdown">
-	          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	            Requerimientos
-	          </a>
-	          <ul class="dropdown-menu">
-	            <li><a class="dropdown-item" href="#">Independientes</a></li>
-	            <li><a class="dropdown-item" href="#">Dependientes</a></li>
-	          </ul>
-	        </li>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/requerimientos}">Requerimientos</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/suministradores}">Suministradores</a>
+			</li>
 	      </ul>
 	      <div class="d-flex" role="search">
 	      	<ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -82,95 +79,74 @@
 		    </div>
 		  </div>
 		  <div class="accordion-item">
-		    <h2 class="accordion-header">
-		      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-		        DESCRIPCIÓN
-		      </button>
-		    </h2>
-		    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-		      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-		    </div>
+		  		    <h2 class="accordion-header">
+		  		      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+		  		        CATEGORÍA
+		  		      </button>
+		  		    </h2>
+		  		    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		  		      <div class="accordion-body">
+		  				<select class="form-select" aria-label="Default select example">
+		  					<option th:each="s : ${lstSolicitudes}" th:value="${s.catSol}" th:text="${s.catSol}"></option>	
+		  				</select>
+		  			  </div>
+		  		    </div>
 		  </div>
 		  <div class="accordion-item">
-		  	<h2 class="accordion-header">
-		  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-		  		CLASIFICACIÓN
-		  		</button>
-		  	</h2>
-		  	<div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-		  	<div class="accordion-body">
-				<select class="form-select" aria-label="Default select example">
-								  <option value="2">2</option>
-								  <option value="3">3</option>
-				</select>
-			</div>
-		  	</div>
+		  		  		    <h2 class="accordion-header">
+		  		  		      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+		  		  		        PRIORIDAD
+		  		  		      </button>
+		  		  		    </h2>
+		  		  		    <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		  		  		      <div class="accordion-body">
+		  		  				<select class="form-select" aria-label="Default select example">
+		  		  					<option th:each="s : ${lstSolicitudes}" th:value="${s.nivPri}" th:text="${s.nivPri}"></option>	
+		  		  				</select>
+		  		  			  </div>
+		  		  		    </div>
 		  </div>
 		  <div class="accordion-item">
-		  	<h2 class="accordion-header">
-		  	<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-		  		ESTADO
-		  	</button>
-		  	</h2>
-		  <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-		  		<div class="accordion-body">
-					<div class="form-check">
-					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-					  <label class="form-check-label" for="flexCheckDefault">
-					    Pendiente
-					  </label>
-					</div>
-					<div class="form-check">
-					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-					  <label class="form-check-label" for="flexCheckDefault">
-					    Programada
-					  </label>
-					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-						<label class="form-check-label" for="flexCheckDefault">
-						Ejecutada
-						</label>
-					</div>
-					<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-					<label class="form-check-label" for="flexCheckDefault">
-					   Completada
-					</label>
-					</div>
-					<div class="form-check">
-					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-					  <label class="form-check-label" for="flexCheckDefault">
-					    Denegada
-			     	  </label>
-					</div>
-				</div>
-		  </div>
-		  </div>
-		  <div class="accordion-item">
-		  	 <h2 class="accordion-header">
-		  	  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-		  	   FECHA
-		  	  </button>
-		  	  </h2>
-		  	<div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-		  	    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-		  	   </div>
-		  	</div>
-			<div class="accordion-item">
-				<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
-				  EMPLEADO
-				</button>
-				</h2>
-				<div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-				<div class="accordion-body">
-					<select class="form-select" aria-label="Default select example">
-						<option th:each="s : ${lstSolicitudes}" th:value="${s.empleado.codEmp}" th:text="${s.empleado.nomEmp} + ' ' + ${s.empleado.apeEmp}"></option>		  
-					</select>
-				</div>
-				</div>
-			</div>
+		  	  	<h2 class="accordion-header">
+		  	  	<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+		  	  		ESTADO
+		  	  	</button>
+		  	  	</h2>
+		  	  <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		  	  		<div class="accordion-body">
+		  				<div class="form-check">
+		  				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+		  				  <label class="form-check-label" for="flexCheckDefault">
+		  				    Pendiente
+		  				  </label>
+		  				</div>
+		  				<div class="form-check">
+		  				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+		  				  <label class="form-check-label" for="flexCheckDefault">
+		  				    Programada
+		  				  </label>
+		  				</div>
+		  				<div class="form-check">
+		  					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+		  					<label class="form-check-label" for="flexCheckDefault">
+		  					Ejecutada
+		  					</label>
+		  				</div>
+		  				<div class="form-check">
+		  				<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+		  				<label class="form-check-label" for="flexCheckDefault">
+		  				   Completada
+		  				</label>
+		  				</div>
+		  				<div class="form-check">
+		  				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+		  				  <label class="form-check-label" for="flexCheckDefault">
+		  				    Denegada
+		  		     	  </label>
+		  				</div>
+		  			</div>
+		  	  </div>
+		  	  </div>
 		</div>
 	</div>
 	<div style="width: 80%; float: right;">
@@ -180,11 +156,11 @@
 				<th>Código</th>
 				<th>Solicitante</th>
 				<th>Descripción</th>
-				<th>Nivel</th>
+				<th>Categoría</th>
+				<th>Prioridad</th>
 				<th>Estado</th>
 				<th>Fecha de Creación</th>
 				<th>Fecha de Actualización</th>
-				<th>Empleado</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -192,11 +168,11 @@
 				<td th:text="${s.codSol}"></td>
 				<td th:text="${s.solicitante.nomSoli} + ' ' + ${s.solicitante.apeSoli}"></td>
 				<td th:text="${s.desSol}"></td>
-				<td th:text="${s.nivCla}"></td>
+				<td th:text="${s.catSol}"></td>
+				<td th:text="${s.nivPri}"></td>
 				<td th:text="${s.estSol}"></td>
 				<td th:text="${s.fecCre}"></td>
 				<td th:text="${s.fecAct}"></td>
-				<td th:text="${s.empleado.nomEmp} + ' ' + ${s.empleado.apeEmp}"></td>
 			</tr>
 		</tbody>
 	</table>

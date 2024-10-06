@@ -5,9 +5,8 @@ import java.sql.Date;
 import jakarta.persistence.*;
 
 @Entity
-@Inheritance (strategy = InheritanceType.JOINED)
 @Table (name = "REQUERIMIENTO")
-public abstract class Requerimiento {
+public class Requerimiento {
 
 	@Id
 	@Column (name = "COD_REQ", length = 5, nullable = false)
@@ -18,8 +17,8 @@ public abstract class Requerimiento {
 	private Solicitud solicitud;
 	
 	@ManyToOne
-	@JoinColumn (name = "COD_EMP", nullable = false)
-	private Empleado empleado;
+	@JoinColumn (name = "COD_SUM", nullable = false)
+	private Suministrador suministrador;
 	
 	@Column (name = "TIT_REQ", length = 80, nullable = false)
 	private String titReq;
@@ -34,7 +33,7 @@ public abstract class Requerimiento {
 	private double preReq;
 	
 	@Column (name = "FEC_LIM", nullable = true)
-	private Date fecPro;
+	private Date fecLim;
 	
 	@Column (name = "EST_REQ", length = 50, nullable = true)
 	private String estReq;
@@ -65,12 +64,12 @@ public abstract class Requerimiento {
 		this.solicitud = solicitud;
 	}
 
-	public Empleado getEmpleado() {
-		return empleado;
+	public Suministrador getSuministrador() {
+		return suministrador;
 	}
 
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
+	public void setSuministrador(Suministrador suministrador) {
+		this.suministrador = suministrador;
 	}
 
 	public String getTitReq() {
@@ -105,12 +104,12 @@ public abstract class Requerimiento {
 		this.preReq = preReq;
 	}
 
-	public Date getFecPro() {
-		return fecPro;
+	public Date getFecLim() {
+		return fecLim;
 	}
 
-	public void setFecPro(Date fecPro) {
-		this.fecPro = fecPro;
+	public void setFecLim(Date fecLim) {
+		this.fecLim = fecLim;
 	}
 
 	public String getEstReq() {
