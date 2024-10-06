@@ -28,14 +28,16 @@ public class Solicitud {
 	@Column (name = "EST_SOL", length = 50, nullable = false)
 	private String estSol;
 	
-	@Column (name = "FEC_CRE", length = 5, nullable = false)
+	@Column(name = "FEC_CRE", nullable = false, updatable = true)
 	private Date fecCre;
 	
-	@Column (name = "FEC_ACT", length = 5, nullable = false)
+	@Column(name = "FEC_ACT", insertable = false, updatable = true)
 	private Date fecAct;
 
 	public Solicitud() {
 		// TODO Auto-generated constructor stub
+		 this.fecCre = new Date(System.currentTimeMillis());
+		 this.fecAct = new Date(System.currentTimeMillis());
 	}
 
 	public String getCodSol() {
