@@ -10,7 +10,7 @@ public class Requerimiento {
 
 	@Id
 	@Column (name = "COD_REQ", length = 5, nullable = false)
-	private String codSol;
+	private String codReq;
 	
 	@OneToOne
 	@JoinColumn (name = "COD_SOL", nullable = false)
@@ -48,12 +48,12 @@ public class Requerimiento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getCodSol() {
-		return codSol;
+	public String getCodReq() {
+		return codReq;
 	}
 
-	public void setCodSol(String codSol) {
-		this.codSol = codSol;
+	public void setCodReq(String codReq) {
+		this.codReq = codReq;
 	}
 
 	public Solicitud getSolicitud() {
