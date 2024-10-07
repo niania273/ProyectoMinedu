@@ -50,11 +50,6 @@
 		<h1>Solicitudes</h1>
 		<p>Filtrar por:</p>
 		
-		<form th:action="@{/solicitudes}" method="get">
-			<input id="txtSearch" type="text" name="keyword">
-			<button type="submit">Buscar</button>
-		</form>
-		
 		<div class="accordion accordion-flush" id="accordionFlushExample">
 		  <div class="accordion-item">
 		    <h2 class="accordion-header">
@@ -154,8 +149,10 @@
 		  	  </div>
 		 </div>
 		</div>
+		<a class="btn btn-primary" href="/solicitudes/crear">Crear solicitud</a>
 	</div>
-	<a class="btn btn-primary" href="/solicitudes/crear">Crear solicitud</a>
+
+	</div>
 	<div style="width: 80%; float: right;">
 	<table class="table" border="1">
 		<thead>
@@ -182,13 +179,13 @@
 				<td th:text="${s.fecCre}"></td>
 				<td th:text="${s.fecAct}"></td>
 				<td style="white-space: nowrap;">
-					<!-- <a class="btn btn-primary btn-sm" th:href="@{/solicitudes/editar(id=${product.id})}">Editar</a>
-					<a class="btn btn-primary btn-sm" th:href="@{/solicitudes/eliminar(id=${product.id})}">Eliminar</a> -->
+				    <a class="btn btn-primary btn-sm" th:href="@{/solicitudes/editar/{id}(id=${s.codSol})}">Editar</a>
+				    <a class="btn btn-primary btn-sm" th:href="@{/solicitudes/eliminar/{id}(id=${s.codSol})}" 
+				       onclick="return confirm('¿Estás seguro que deseas eliminar esta solicitud?');">Eliminar</a>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<button class="btn btn-primary">Actualizar solicitud</button>
 	</div>
 	</div>
 	</div>

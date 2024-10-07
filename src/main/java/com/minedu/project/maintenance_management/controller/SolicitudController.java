@@ -1,5 +1,6 @@
 package com.minedu.project.maintenance_management.controller;
 
+
 /*import java.util.List;*/
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.minedu.project.maintenance_management.model.SolicitudDTO;
-/*import com.minedu.project.maintenance_management.model.Solicitud;*/
 import com.minedu.project.maintenance_management.service.SolicitudService;
 
 @Controller
@@ -25,7 +25,7 @@ public class SolicitudController {
 			model.addAttribute("solicitudes", solicitudService.findByKeyword(keyword));
 		}
 		else {
-			model.addAttribute("solicitudes", solicitudService.findAllSolicitudes());			
+			model.addAttribute("solicitudes", solicitudService.findAllSolicitudes());
 		}
 		
 		return "Solicitudes/Solicitudes";
@@ -40,35 +40,44 @@ public class SolicitudController {
 	
 	@PostMapping("/crear")
 	public String createSolicitud(@ModelAttribute SolicitudDTO solicitudDTO) {
+		solicitudService.saveSolicitud(solicitudDTO);
+		return "redirect:/solicitudes";
+	}
+	
+	@GetMapping("/editar/{id}")
+	public String getSolicitudById(@PathVariable String id, Model model) {
 		
-		solicitudService.saveSolicitud(solicitudDTO);		
+		try {
+			SolicitudDTO solicitudDTO = solicitudService.findSolicitudById(id);
+			model.addAttribute("solicitudDTO", solicitudDTO);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "redirect:/solicitudes";
+		}
+		return "Solicitudes/EditarSolicitud";
+	}
+
+	@PostMapping("/editar")
+	public String updateSolicitud(Model model, @RequestParam String id, @ModelAttribute SolicitudDTO solicitudDTO) {
+		
+		try {
+			solicitudService.saveSolicitud(solicitudDTO);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "redirect:/solicitudes";
+	}
+	
+	@GetMapping("/eliminar/{id}")
+	public String deleteSolicitud(@PathVariable String id) {
+		try {
+			solicitudService.deleteSolicitudbyId(id);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
 		return "redirect:/solicitudes";
 	}
-
-	/*
-    @GetMapping("/{id}")
-    public Optional<Solicitud> getSolicitudById(@PathVariable String id) {
-        return service.findSolicitudById(id);
-    }
-  
-    @PostMapping
-    public Solicitud createSolicitud(@RequestBody Solicitud solicitud) {
-        return solicitudService.saveSolicitud(solicitud);
-    }
-
-    @PutMapping("/{id}")
-    public Solicitud updateSolicitud(@PathVariable String id, @RequestBody Solicitud solicitudDetails) {
-        Solicitud solicitud = solicitudService.findSolicitudById(id).orElseThrow(() -> new RuntimeException("¡Solicitud no encontrada!"));
-
-        solicitud.setNivCla(solicitudDetails.getNivCla());
-        solicitud.setEstSol(solicitudDetails.getEstSol());
-
-        return solicitudService.saveSolicitud(solicitud);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteSubject(@PathVariable String id) {
-        solicitudService.deleteSolicitud(id);
-    }*/
 }
