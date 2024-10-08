@@ -12,10 +12,6 @@ public class Equipo {
 	
 	@Column (name = "NOM_EQU", length = 60, nullable = false)
 	private String nomEqu;
-	
-	@ManyToOne
-	@JoinColumn (name = "COD_MOD", nullable = false)
-	private Modelo modelo;
 
 	public Equipo() {
 		// TODO Auto-generated constructor stub
@@ -35,13 +31,5 @@ public class Equipo {
 
 	public void setNomEqu(String nomEqu) {
 		this.nomEqu = nomEqu;
-	}
-
-	public Modelo getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
 	}
 }

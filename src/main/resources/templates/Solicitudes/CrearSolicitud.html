@@ -44,7 +44,7 @@
 						<label>Código</label>
 						<input class="form-control" th:field="${solicitudDTO.codSol}">
 						<label>Descripción</label>
-						<input class="form-control" th:field="${solicitudDTO.desSol}">
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="${solicitudDTO.desSol}"></textarea>
 						<label>Categoría</label>
 						<select class="form-select" aria-label="Default select example" th:field="${solicitudDTO.catSol}">
 						  <option value="Hardware">Hardware</option>
@@ -78,6 +78,17 @@
 						<input class="form-control" th:field="${solicitudDTO.emaSoli}">
 						<label>Teléfono</label>
 						<input class="form-control" type="number" th:field="${solicitudDTO.telSoli}">
+						
+						<h3>Equipo</h3>
+
+						<label for="codEqu">Código del equipo</label>
+						<input class="form-control" type="text" th:field="${solicitudDTO.equipo.codEqu}" readonly>
+
+						<label for="nomEqu">Nombre</label>
+						<input class="form-control" type="text" th:field="${solicitudDTO.equipo.nomEqu}">
+
+						<label for="canEqu">Cantidad</label>
+						<input class="form-control" type="number" th:field="${solicitudDTO.canEqu}">
 						
 						<div class="row">
 							<div class="offset-sm-4 col-sm-4 d-grid">

@@ -23,7 +23,11 @@ public class SolicitudService {
 		return solicitudRepository.findAll();
 	}
 	
-	public SolicitudDTO findSolicitudById(String id){
+	public Solicitud findSolicitudById(String id) {
+		return solicitudRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Solicitud no encontrada:" + id));
+	}
+	
+	public SolicitudDTO findSolicitudDTOById(String id){
 		
 		Solicitud solicitud = solicitudRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Solicitud no encontrada:" + id));
 		
@@ -75,7 +79,16 @@ public class SolicitudService {
 		solicitudRepository.delete(solicitud);
 	}
 	
-	public List<Solicitud> findByKeyword(String keyword){
-		return solicitudRepository.findByKeyword(keyword);
+	public String generateNuevoCodigo() {
+		String ultimoCodigo = solicitudRepository.findUltimoCodigo();
+		
+		if(ultimoCodigo == null || ultimoCodigo.isEmpty()) {
+			return "ST100";
+		}
+		
+		String numero = ultimoCodigo.substring(2);
+		int nuevo = Integer.parseInt(numero) +1;
+		
+		return "ST" + nuevo;
 	}
 }

@@ -48,6 +48,9 @@
 	<div>
 	<div style="width: 15%; float: left;">
 		<h1>Solicitudes</h1>
+		<br>
+		<a class="btn btn-primary" href="/solicitudes/crear">+ Nueva solicitud</a>
+		<br>
 		<p>Filtrar por:</p>
 		
 		<div class="accordion accordion-flush" id="accordionFlushExample">
@@ -149,7 +152,6 @@
 		  	  </div>
 		 </div>
 		</div>
-		<a class="btn btn-primary" href="/solicitudes/crear">Crear solicitud</a>
 	</div>
 
 	</div>
@@ -179,10 +181,11 @@
 				<td th:text="${s.fecCre}"></td>
 				<td th:text="${s.fecAct}"></td>
 				<td style="white-space: nowrap;">
-				    <a class="btn btn-primary btn-sm" th:href="@{/solicitudes/editar/{id}(id=${s.codSol})}">Editar</a>
-				    <a class="btn btn-primary btn-sm" th:href="@{/solicitudes/eliminar/{id}(id=${s.codSol})}" 
-				       onclick="return confirm('¿Estás seguro que deseas eliminar esta solicitud?');">Eliminar</a>
-				</td>
+				           <!-- <a class="btn btn-primary btn-sm" th:href="@{/solicitudes/editar/{id}(id=${s.codSol})}">Editar</a>
+				            <a class="btn btn-primary btn-sm" 
+				               th:href="@{/solicitudes/eliminar/{solicitudId}/{equipoId}(solicitudId=${s.codSol}, equipoId=${s.solicitudEquipo[0].equipo.codEqu})}" 
+				               onclick="return confirm('¿Estás seguro que deseas eliminar esta solicitud?');">Eliminar</a> -->
+				        </td>
 			</tr>
 		</tbody>
 	</table>

@@ -11,11 +11,12 @@ public class SolicitudEquipoPK implements Serializable{
 	private String solicitud;
 	private String equipo;
 	
-	public SolicitudEquipoPK() {
-		// TODO Auto-generated constructor stub
+	 public SolicitudEquipoPK(String solicitud, String equipo) {
+		this.solicitud = solicitud;
+		this.equipo = equipo;
 	}
-	
-	 public String getSolicitud() {
+
+	public String getSolicitud() {
 		return solicitud;
 	}
 

@@ -1,6 +1,5 @@
 package com.minedu.project.maintenance_management.model;
 
-
 public class SolicitudDTO {
 	
 	private String codSol;
@@ -15,6 +14,25 @@ public class SolicitudDTO {
 	private String apeSoli;
 	private String emaSoli;
 	private String telSoli;
+	
+	private Equipo equipo;
+	private Byte canEqu;
+	
+	public Byte getCanEqu() {
+		return canEqu;
+	}
+
+	public void setCanEqu(Byte canEqu) {
+		this.canEqu = canEqu;
+	}
+
+	public Equipo getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
+	}
 	
 	public String getCodSol() {
 		return codSol;

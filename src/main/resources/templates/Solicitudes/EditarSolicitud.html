@@ -42,9 +42,9 @@
 			<div class="col-md-8 mx-auto rounded border p-4 m-4">
 				<form method="post" th:object="${solicitudDTO}">
 						<label>Código</label>
-						<input class="form-control" th:field="${solicitudDTO.codSol}">
+						<input class="form-control" th:field="${solicitudDTO.codSol}" disabled readonly>
 						<label>Descripción</label>
-						<input class="form-control" th:field="${solicitudDTO.desSol}">
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="${solicitudDTO.desSol}"></textarea>
 						<label>Categoría</label>
 						<select class="form-select" aria-label="Default select example" th:field="${solicitudDTO.catSol}">
 						  <option value="Hardware">Hardware</option>
@@ -67,7 +67,7 @@
 								  <option value="Completada">Completada</option>
 						</select>
 						<label>Código del solicitante</label>
-						<input class="form-control" th:field="${solicitudDTO.codSoli}">
+						<input class="form-control" th:field="${solicitudDTO.codSoli}" disabled readonly>
 						<label>DNI</label>
 						<input class="form-control" th:field="${solicitudDTO.dniSoli}">
 						<label>Nombres</label>
