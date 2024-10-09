@@ -19,15 +19,7 @@ public class RequerimientoService {
 	
 	public Requerimiento findRequerimientoById(String id) {
 		
-		List<Requerimiento> lstRequerimientos = findAllRequerimientos();
-		
-		for(Requerimiento r : lstRequerimientos) {
-			if(r.getCodReq().equals(id)) {
-				return r;
-			}
-		}
-		
-		return null;
+		return requerimientoRepository.findById(id).orElseThrow(()-> new NoSuchElementException("No se encontró el Requerimiento con el siguente ID " + id));
 		
 	}
 	

@@ -29,8 +29,8 @@ public class SuministradorController {
 		return "Suministrador/RegistrarSuministrador";
 	}
 	
-	@GetMapping ("/editar/{id}")
-	public String showEditarSuministrador(@PathVariable("id") String ID, Model model) {
+	@GetMapping ("/editar")
+	public String showEditarSuministrador(@RequestParam("codSuministrador") String ID, Model model) {
 		Suministrador suministrador = service.findSuministradorById(ID);
 		model.addAttribute("suministrador", suministrador);
 		return "Suministrador/EditarSuministrador";
