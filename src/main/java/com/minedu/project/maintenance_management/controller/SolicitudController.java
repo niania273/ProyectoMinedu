@@ -1,6 +1,5 @@
 package com.minedu.project.maintenance_management.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.minedu.project.maintenance_management.model.Solicitud;
 import com.minedu.project.maintenance_management.model.SolicitudDTO;
 import com.minedu.project.maintenance_management.model.SolicitudEquipo;
 import com.minedu.project.maintenance_management.service.SolicitudEquipoService;
@@ -33,23 +31,8 @@ public class SolicitudController {
 		return "Solicitudes/Solicitudes";
 	}
 	
-	@GetMapping("/filtrar")
-	public String filtrarSolicitudes(@RequestParam("codSol") String codSol, Model model) {
-		if (codSol.isEmpty()) {
-	        model.addAttribute("solicitudes", solicitudService.findAllSolicitudes());
-	    } else {
-	        List<Solicitud> solicitudes = new ArrayList<>();
-	        Solicitud solicitud = solicitudService.findSolicitudById(codSol);
-	        if (solicitud != null) {
-	            solicitudes.add(solicitud);
-	        }
-	        model.addAttribute("solicitudes", solicitudes);
-	    }
-	    return "Solicitudes/Solicitudes :: solicitudesTable";
-	}
-	
-	@GetMapping("/ver/{id}")
-	public String getSolicitudById(@PathVariable("id") String codSol, Model model) {
+	@GetMapping("/ver/{codSol}")
+	public String getSolicitudById(@PathVariable("codSol") String codSol, Model model) {
 		
 		try {
 			SolicitudDTO solicitudDTO = solicitudService.findSolicitudDTOById(codSol);
@@ -67,8 +50,8 @@ public class SolicitudController {
 		return "Solicitudes/VerSolicitud";
 	}
 	
-	@GetMapping("/editar/{id}")
-	public String updateSolicitud(@PathVariable("id") String codSol, Model model) {
+	@GetMapping("/editar/{codSol}")
+	public String updateSolicitud(@PathVariable("codSol") String codSol, Model model) {
 		
 		try {
 			SolicitudDTO solicitudDTO = solicitudService.findSolicitudDTOById(codSol);
@@ -86,25 +69,22 @@ public class SolicitudController {
 		return "Solicitudes/EditarSolicitud";
 	}
 
-	@PostMapping("/editar/{id}")
-	public String updateSolicitud(@PathVariable("id") String codSol, 
-            						Model model, 
-            						@ModelAttribute SolicitudDTO solicitudDTO) {
+	@PostMapping("/editar/{codSol}")
+	public String updateSolicitud(@PathVariable("codSol") String codSol, 
+			Model model, 
+			@ModelAttribute SolicitudDTO solicitudDTO) {
 		
 		try {
-			solicitudDTO.setCodSol(codSol);
-			System.out.println(solicitudDTO.getCodSoli());
 			solicitudService.updateSolicitud(solicitudDTO);
-			System.out.println("Llegue aquí 3");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return "redirect:/solicitudes/editar/" + codSol;
+			return "redirect:/solicitudes/editar/";
 		}
 		return "redirect:/solicitudes";
 	}
 	
-	@GetMapping("/eliminar/{id}")
-	public String deleteSolicitud(@PathVariable("id") String codSol) {
+	@GetMapping("/eliminar/{codSol}")
+	public String deleteSolicitud(@PathVariable("codSol") String codSol) {
 		try {
 			solicitudService.deleteSolicitud(codSol);
 			

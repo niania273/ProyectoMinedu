@@ -1,5 +1,7 @@
 package com.minedu.project.maintenance_management.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +46,13 @@ public class SolicitudService {
 		return solicitudRepository.findAll();
 	}
 	
-	public Solicitud findSolicitudById(String id) {
-		return solicitudRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Solicitud no encontrada:" + id));
+	public Solicitud findSolicitudById(String codSol) {
+		return solicitudRepository.findById(codSol).orElseThrow( () -> new IllegalArgumentException("Solicitud no encontrada:" + codSol));
 	}
 	
 	public SolicitudDTO findSolicitudDTOById(String id){
 		
-		Solicitud solicitud = solicitudRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Solicitud no encontrada:" + id));
+		Solicitud solicitud = solicitudRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("SolicitudDTO no encontrada:" + id));
 		
 		SolicitudDTO solicitudDTO = new SolicitudDTO();
 		solicitudDTO.setDesSol(solicitud.getDesSol());
@@ -96,6 +98,8 @@ public class SolicitudService {
 	@Transactional
 	public void updateSolicitud(SolicitudDTO solicitudDTO) {
 		
+		LocalDate fechaActual = LocalDate.now();
+		
 		Solicitante solicitante = solicitanteService.findById(solicitudDTO.getCodSoli());
 		
 		solicitante.setCodSoli(solicitudDTO.getCodSoli());
@@ -106,13 +110,15 @@ public class SolicitudService {
 		solicitante.setTelSoli(solicitudDTO.getTelSoli());
 		
 		Solicitante savedSolicitante = solicitanteRepository.save(solicitante);
-		
 		Solicitud solicitud = findSolicitudById(solicitudDTO.getCodSol());
-		System.out.println(solicitud.getCodSol());
 		solicitud.setDesSol(solicitudDTO.getDesSol());
 		solicitud.setCatSol(solicitudDTO.getCatSol());
 		solicitud.setNivPri(solicitudDTO.getNivPri());
 		solicitud.setEstSol(solicitudDTO.getEstSol());
+		
+		Date fechaAct = Date.valueOf(fechaActual);
+	    solicitud.setFecAct(fechaAct);
+	    
 		solicitud.setSolicitante(savedSolicitante);
 		
 		solicitudRepository.save(solicitud);
@@ -121,8 +127,7 @@ public class SolicitudService {
 	        for (SolicitudEquipo solEqu : solicitudDTO.getEquipos()) {
 	            
 	        	Equipo equipo = equipoRepository.findById(solEqu.getEquipo().getCodEqu()).orElseThrow(() -> new EntityNotFoundException("Equipo no encontrado"));
-	        	equipo.setNomEqu(solEqu.getEquipo().getNomEqu());
-	        	System.out.println(equipo.getCodEqu());
+	        	equipo.setNomEqu(solEqu.getEquipo().getNomEqu());;
 	        	solEqu.setCanEqu(solEqu.getCanEqu());        	
 	        	
 	        	solEqu.setSolicitud(solicitud);            

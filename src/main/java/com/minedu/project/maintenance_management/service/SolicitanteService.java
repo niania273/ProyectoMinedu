@@ -13,7 +13,7 @@ public class SolicitanteService {
 	private SolicitanteRepository solicitanteRepository;
 	
 	public Solicitante findById(String id) {
-		return solicitanteRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Solicitud no encontrada:" + id));
+		return solicitanteRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Solicitante no encontrado:" + id));
 	}
 	
 	public String generateNuevoCodigo() {
