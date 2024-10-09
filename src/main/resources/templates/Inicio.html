@@ -36,6 +36,38 @@
 	    	</div>
 		  </div>
 	</nav><br>
+	<div id="contenido" style="width: 98%; margin-left: 20px; margin-right: 20px;">
+			<h1>¡Bienvenido! ¿Qué deseas hacer?</h1><br>
+			<div class="row">
+				<div class="col-sm-12 mb-6 mb-sm-0">
+							  			    <div class="card">
+							  			      <div class="card-body">
+							  			        <h5 class="card-title">Información de solicitudes</h5>
+							  			        <p class="card-text">Verificar los datos del solicitante, los equipos y el estado.</p>
+							  			        <a class="btn btn-primary" th:href="@{/solicitudes}">Consultar</a>
+							  			      </div>
+							  			    </div>
+			</div>
+			  <div class="col-sm-6 mb-3 mb-sm-0" style="margin-top: 20px;">
+			    <div class="card">
+			      <div class="card-body">
+			        <h5 class="card-title">Información de requerimientos</h5>
+			        <p class="card-text">Ingresar los datos del cliente, el producto y la cantidad.</p>
+			        <a class="btn btn-primary" th:href="@{/requerimientos/generar}">Generar</a>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="col-sm-6" style="margin-top: 20px;">
+			    <div class="card">
+			      <div class="card-body">
+			        <h5 class="card-title">Información de suministradores</h5>
+			        <p class="card-text">Verificar los datos de los suministradores.</p>
+			        <a class="btn btn-primary" th:href="@{/suministradores}">Consultar</a>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import com.minedu.project.maintenance_management.repository.SolicitudRepository;
 import com.minedu.project.maintenance_management.repository.SuministradorRepository;
 import com.minedu.project.maintenance_management.model.Suministrador;
 

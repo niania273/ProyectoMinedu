@@ -10,6 +10,10 @@
 	* {
 		user-select: none;
 	}
+	
+	.bi {
+			margin-right: 10px;
+	}
 
 	tbody tr.active {
 		border-radius: 2px;
@@ -58,8 +62,8 @@
 			</nav>
 		</div>
 	<div>
-	<div style="width: 12%; float: left;">
-		<h1>Solicitudes</h1>
+		<h1 style="position:absolute">Solicitudes</h1>
+	<div style="float: left; width: 15%; position:relative; top: 65px">
 		<a class="btn btn-secondary w-100 my-2" href="/solicitudes/crear">
 			<i class="bi bi-plus-circle"></i>
 			Generar
@@ -84,8 +88,8 @@
 	</div>
 
 	</div>
-	<div style="width: 85%; float: left; margin-left: 45px;">
-	<table id="tableSolicitudes" class="display table table-striped table-bordered table-hover" border="1" style="margin-top: 20px;">
+	<div style="width: 80%; float: right">
+	<table id="tableSolicitudes" class="display table table-striped table-bordered table-hover" border="1">
 		<thead>
 			<tr>
 				<th>Código</th>
@@ -185,25 +189,17 @@ $deleteSolButton.addEventListener('click', () => {
 	
 });
 
-const table = new DataTable('#tableSolicitudes', {
-    layout: {
-        bottomEnd: {
-            paging: {
-                firstLast: false
-            }
-        }
-    },
-    search: {
-        return: true
-    },
-    ordering: false,
-    lengthChange: false,
-    info: false,
-    lengthMenu: [
-        [10, 25, 50, -1],
-        [10, 25, 50, 'All']
-    ]
-});
+new DataTable('#tableSolicitudes', {
+		layout: {
+			bottomEnd: {
+				paging: {
+					firstLast: false
+				}
+			}
+		},
+		lengthChange: false,
+		info: false
+	});
 
 const searchInput = document.getElementById('dt-search-0');
 searchInput.classList.add('form-control');
