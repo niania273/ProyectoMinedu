@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.minedu.project.maintenance_management.model.Requerimiento;
 import com.minedu.project.maintenance_management.repository.RequerimientoRepository;
-
 import java.util.*;
 
 @Service
@@ -18,8 +17,18 @@ public class RequerimientoService {
 		return requerimientoRepository.findAll();
 	}
 	
-	public Optional<Requerimiento> findRequerimientoById(String id) {
-		return requerimientoRepository.findById(id);
+	public Requerimiento findRequerimientoById(String id) {
+		
+		List<Requerimiento> lstRequerimientos = findAllRequerimientos();
+		
+		for(Requerimiento r : lstRequerimientos) {
+			if(r.getCodReq().equals(id)) {
+				return r;
+			}
+		}
+		
+		return null;
+		
 	}
 	
 	public Requerimiento saveRequerimiento(Requerimiento requerimiento) {

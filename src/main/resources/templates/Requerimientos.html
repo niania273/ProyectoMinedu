@@ -6,10 +6,24 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
+<link 
+	href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"
+	rel="stylesheet" type="text/css"/>
 <title>OTIC | Unidad de Servicios de Atencion al Usuario</title>
 <link rel="icon" type="image/png"
 	href="https://www.ugellaconvencion.gob.pe/lc/imagenes/logo-otic.png">
 </head>
+<style>
+	* {
+		user-select: none;
+	}
+
+	tbody tr.active {
+		border-radius: 2px;
+		outline: 2px solid #09f;
+		opacity: 1;
+	}
+</style>
 <body>
 	<nav class="navbar navbar-expand-lg navbar"
 		style="background-color: #F1F1F1;">
@@ -41,17 +55,14 @@
 	<br>
 
 	<div style="padding: 30px;">
-		<div>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#">INICIO</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/}">INICIO</a></li>
 					<li class="breadcrumb-item active" aria-current="page">REQUERIMIENTOS</li>
 				</ol>
 			</nav>
-		</div>
-		<div>
 			<div style="width: 15%; float: left;">
-				<h1>Requerimientos</h1>
+				<h2>Requerimientos</h2>
 				<p>Filtrar por:</p>
 				<div class="accordion accordion-flush" id="accordionFlushExample">
 					<div class="accordion-item">
@@ -94,7 +105,7 @@
 
 			</div>
 			<div style="width: 80%; float: right; margin-left: 50px">
-				<table class="table" border="1">
+				<table id="tableRequerimientos" class="display table table-striped table-bordered table-hover" border="1">
 					<thead>
 						<tr>
 							<th>Código</th>
@@ -109,7 +120,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="r : ${lstRequerimientos}">
-							<td th:text="${r.codReq}"></td>
+							<td th:text="${r.codReq}" th:value="${r.codReq}"></td>
 							<td th:text="${r.solicitud.codSol}"></td>
 							<td th:text="${r.suministrador.codSum}"></td>
 							<td th:text="${r.titReq}"></td>
@@ -120,13 +131,75 @@
 						</tr>
 					</tbody>
 				</table>
-				<button class="btn btn-primary">Actualizar requerimiento</button>
-				<button class="btn btn-success"><a th:href="@{/requerimientos/generar}" class="text-white">Generar requerimiento</a></button>
+				<button class="btn btn-primary" id="updateReqButton">Actualizar requerimiento</button>
+				<a th:href="@{/requerimientos/generar}"><button class="btn btn-success">Generar requerimiento</button>
 			</div>
-		</div>
 </body>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
+	
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script>
+const $ = el => document.querySelector(el);
+const $$ = el => document.querySelectorAll(el);
+
+const $body = $('tbody');
+const $updateReqButton = $('#updateReqButton')
+var codRequerimiento = "";  // Declarar la variable
+
+// Agregar un listener al documento para manejar clics en el cuerpo y fuera de la tabla
+document.addEventListener('click', event => {
+    const tr = event.target.closest('tr');
+
+    // Si se hizo clic en una fila
+    if (tr && $body.contains(tr)) {
+        // Verificar si la fila ya tiene la clase 'active'
+        const isActive = tr.classList.contains('active');
+
+        // Remover la clase de cualquier otra fila que esté activa
+        $body.querySelectorAll('tr').forEach(row => {
+            row.classList.remove('active');
+        });
+
+        // Si la fila no estaba activa, agregar la clase 'active' y obtener el código del requerimiento; de lo contrario, eliminarla
+        if (!isActive) {
+            tr.classList.add('active');
+            codRequerimiento = tr.querySelector('td').textContent;
+        } else {
+            // Si la fila ya estaba activa, se elimina la clase y se limpia la variable
+            codRequerimiento = ""; // Limpia la variable
+        }
+
+    }
+});
+
+$updateReqButton.addEventListener('click', () => {
+	
+	if(codRequerimiento) {
+		window.location.href=`/requerimientos/actualizar?codRequerimiento=${encodeURIComponent(codRequerimiento)}`;
+	} else {
+		alert("Por favor, seleccione un requerimiento");
+	}
+	
+});
+
+//Script table pagination
+new DataTable('#tableRequerimientos', {
+    layout: {
+        bottomEnd: {
+            paging: {
+                firstLast: false
+            }
+        }
+    },
+    ordering: false,
+    lengthChange: false,
+    searching: false,
+    info: false
+});
+</script>
+	
 </html>
