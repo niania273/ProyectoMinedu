@@ -1,39 +1,41 @@
 package com.minedu.project.maintenance_management.model;
 
+import java.util.List;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+
 public class SolicitudDTO {
 	
 	private String codSol;
+	
+	@NotEmpty(message = "La descripción es requerida.")
 	private String desSol;
 	private String catSol;
 	private String nivPri;
 	private String estSol;
 	
 	private String codSoli;
+	@NotEmpty(message = "El DNI es requerido.")
 	private String dniSoli;
+	@NotEmpty(message = "El nombre es requerido.")
 	private String nomSoli;
+	@NotEmpty(message = "El apellido es requerido.")
 	private String apeSoli;
+	@NotEmpty(message = "El email es requerido.")
+	@Email
 	private String emaSoli;
+	@NotEmpty(message = "El teléfono es requerido.")
 	private String telSoli;
 	
-	private Equipo equipo;
-	private Byte canEqu;
+	private List<SolicitudEquipo> equipos;
 	
-	public Byte getCanEqu() {
-		return canEqu;
+	public List<SolicitudEquipo> getEquipos() {
+		return equipos;
 	}
-
-	public void setCanEqu(Byte canEqu) {
-		this.canEqu = canEqu;
+	public void setEquipos(List<SolicitudEquipo> equipos) {
+		this.equipos = equipos;
 	}
-
-	public Equipo getEquipo() {
-		return equipo;
-	}
-
-	public void setEquipo(Equipo equipo) {
-		this.equipo = equipo;
-	}
-	
 	public String getCodSol() {
 		return codSol;
 	}

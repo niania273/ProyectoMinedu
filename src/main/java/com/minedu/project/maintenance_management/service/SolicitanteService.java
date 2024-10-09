@@ -3,6 +3,7 @@ package com.minedu.project.maintenance_management.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.minedu.project.maintenance_management.model.Solicitante;
 import com.minedu.project.maintenance_management.repository.SolicitanteRepository;
 
 @Service
@@ -10,6 +11,10 @@ public class SolicitanteService {
 	
 	@Autowired
 	private SolicitanteRepository solicitanteRepository;
+	
+	public Solicitante findById(String id) {
+		return solicitanteRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Solicitud no encontrada:" + id));
+	}
 	
 	public String generateNuevoCodigo() {
 		String ultimoCodigo = solicitanteRepository.findUltimoCodigo();

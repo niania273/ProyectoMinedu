@@ -60,14 +60,14 @@
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Descripción</label>
 						<div class="col-sm-10">
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{desSol}"></textarea>
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{desSol}" disabled></textarea>
 						</div>
 					</div>
 					
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Categoría</label>
 						<div class="col-sm-10">
-							<select class="form-select" aria-label="Default select example" th:field="*{catSol}">
+							<select class="form-select" aria-label="Default select example" th:field="*{catSol}" disabled>
 								                    <option value="Hardware">Hardware</option>
 								                    <option value="Software">Software</option>
 								                    <option value="Almacenamiento">Almacenamiento</option>
@@ -80,7 +80,7 @@
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Nivel de prioridad</label>
 						<div class="col-sm-10">
-							<select class="form-select" aria-label="Default select example" th:field="*{nivPri}">
+							<select class="form-select" aria-label="Default select example" th:field="*{nivPri}" disabled>
 								                    <option value="Alta">Alta</option>
 								                    <option value="Media">Media</option>
 								                    <option value="Baja">Baja</option>
@@ -91,7 +91,7 @@
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Estado</label>
 						<div class="col-sm-10">
-							<select class="form-select" aria-label="Default select example" th:field="*{estSol}">
+							<select class="form-select" aria-label="Default select example" th:field="*{estSol}" disabled>
 								                    <option value="Pendiente">Pendiente</option>
 								                    <option value="Programada">Programada</option>
 								                    <option value="Ejecutada">Ejecutada</option>
@@ -106,41 +106,41 @@
 					<label class="col-sm-2 col-form-label">Código</label>
 					<div class="col-sm-10">
 					<input type="text" class="form-control" th:field="*{codSoli}"/>
-					</div>
+						</div>
 					</div>
 					
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">DNI</label>
 					<div class="col-sm-10">
-					<input type="text" class="form-control" th:field="*{dniSoli}">
+					<input type="text" class="form-control" th:field="*{dniSoli}" disabled>
 						</div>
 					</div>
 					
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Nombres</label>
 					<div class="col-sm-10">
-					<input type="text" class="form-control" th:field="*{nomSoli}">
+					<input class="form-control" th:field="*{nomSoli}" disabled>
 						</div>
 					</div>
 	                
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Apellidos</label>
 					<div class="col-sm-10">
-					<input type="text" class="form-control" th:field="*{apeSoli}">
+					<input class="form-control" th:field="*{apeSoli}" disabled>
 						</div>
 					</div>
 	                
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Email</label>
 					<div class="col-sm-10">
-					<input type="text" class="form-control" th:field="*{emaSoli}">
+					<input class="form-control" th:field="*{emaSoli}" disabled>
 					</div>
 					</div>
 					
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Teléfono</label>
 					<div class="col-sm-10">
-					<input class="form-control" type="number" th:field="*{telSoli}">
+					<input class="form-control" type="number" th:field="*{telSoli}" disabled>
 						</div>
 					</div>
 					
@@ -156,24 +156,12 @@
 	                    </thead>
 	                    <tbody>
 							<tr th:each="equipo, iterStat : *{equipos}">
-							                            <td>
-							                                <input type="text" th:field="*{equipos[__${iterStat.index}__].equipo.codEqu}"/>
-							                            </td>
-							                            <td><input class="form-control" type="text" th:field="*{equipos[__${iterStat.index}__].equipo.nomEqu}"/></td>
-							                            <td><input class="form-control" type="number" th:field="*{equipos[__${iterStat.index}__].canEqu}"/></td>
-							                        </tr>
+							    <td th:text="*{equipos[__${iterStat.index}__].equipo.codEqu}"></td>
+							    <td th:text="*{equipos[__${iterStat.index}__].equipo.nomEqu}"></td>
+							    <td th:text="*{equipos[__${iterStat.index}__].canEqu}"></td>
+							</tr>
 	                    </tbody>
 	                </table>
-	                <div class="position-absolute" style="right: 20px; bottom: 20px;">
-	                <div class="row">
-	                    <div class="col-sm-6 d-grid">
-	                        <button type="submit" class="btn btn-primary">Actualizar</button>
-	                    </div>
-	                    <div class="col-sm-6 d-grid">
-	                        <a class="btn btn-danger" href="/solicitudes" role="button">Cancelar</a>
-	                    </div>
-	                </div>
-					</div>
 	            </form>
 
 	    </div>

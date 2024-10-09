@@ -11,6 +11,9 @@ public class SolicitudEquipoPK implements Serializable{
 	private String solicitud;
 	private String equipo;
 	
+	public SolicitudEquipoPK() {}
+
+	
 	 public SolicitudEquipoPK(String solicitud, String equipo) {
 		this.solicitud = solicitud;
 		this.equipo = equipo;

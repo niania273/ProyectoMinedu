@@ -19,6 +19,10 @@ public class SolicitudEquipoService {
 		solicitudEquipoRepository.save(solicitudEquipo);
 	}
 	
+	public List<SolicitudEquipo> findSolicitudEquipoById(String codSol) {
+		return solicitudEquipoRepository.findBySolicitud_CodSol(codSol);
+	}
+	
 	public List<SolicitudEquipo> findAllSolicitudesEquipos(){
 		return solicitudEquipoRepository.findAll();
 	}

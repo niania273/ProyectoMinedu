@@ -4,20 +4,41 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.minedu.project.maintenance_management.model.Equipo;
 import com.minedu.project.maintenance_management.model.Solicitante;
 import com.minedu.project.maintenance_management.model.Solicitud;
 import com.minedu.project.maintenance_management.model.SolicitudDTO;
+import com.minedu.project.maintenance_management.model.SolicitudEquipo;
+import com.minedu.project.maintenance_management.repository.EquipoRepository;
+import com.minedu.project.maintenance_management.repository.RequerimientoRepository;
 import com.minedu.project.maintenance_management.repository.SolicitanteRepository;
+import com.minedu.project.maintenance_management.repository.SolicitudEquipoRepository;
 import com.minedu.project.maintenance_management.repository.SolicitudRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class SolicitudService {
 	
 	@Autowired
 	private SolicitudRepository solicitudRepository;
+	
 	@Autowired
 	private SolicitanteRepository solicitanteRepository;
+	
+	@Autowired
+	private SolicitudEquipoRepository solicitudEquipoRepository;
+	
+	@Autowired
+	private RequerimientoRepository requerimientoRepository;
+	
+	@Autowired
+	private EquipoRepository equipoRepository;
+	
+	@Autowired
+	private SolicitanteService solicitanteService;
 	
 	public List<Solicitud> findAllSolicitudes(){
 		return solicitudRepository.findAll();
@@ -72,11 +93,59 @@ public class SolicitudService {
 		return solicitudRepository.save(solicitud);
 	}
 	
-	public void deleteSolicitudbyId (String id) {
+	@Transactional
+	public void updateSolicitud(SolicitudDTO solicitudDTO) {
 		
-		Solicitud solicitud = solicitudRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Solicitud no encontrada: " + id));
+		Solicitante solicitante = solicitanteService.findById(solicitudDTO.getCodSoli());
 		
-		solicitudRepository.delete(solicitud);
+		solicitante.setCodSoli(solicitudDTO.getCodSoli());
+		solicitante.setDniSoli(solicitudDTO.getDniSoli());
+		solicitante.setNomSoli(solicitudDTO.getNomSoli());
+		solicitante.setApeSoli(solicitudDTO.getApeSoli());
+		solicitante.setEmaSoli(solicitudDTO.getEmaSoli());
+		solicitante.setTelSoli(solicitudDTO.getTelSoli());
+		
+		Solicitante savedSolicitante = solicitanteRepository.save(solicitante);
+		
+		Solicitud solicitud = findSolicitudById(solicitudDTO.getCodSol());
+		System.out.println(solicitud.getCodSol());
+		solicitud.setDesSol(solicitudDTO.getDesSol());
+		solicitud.setCatSol(solicitudDTO.getCatSol());
+		solicitud.setNivPri(solicitudDTO.getNivPri());
+		solicitud.setEstSol(solicitudDTO.getEstSol());
+		solicitud.setSolicitante(savedSolicitante);
+		
+		solicitudRepository.save(solicitud);
+		
+		if (solicitudDTO.getEquipos() != null && !solicitudDTO.getEquipos().isEmpty()) {
+	        for (SolicitudEquipo solEqu : solicitudDTO.getEquipos()) {
+	            
+	        	Equipo equipo = equipoRepository.findById(solEqu.getEquipo().getCodEqu()).orElseThrow(() -> new EntityNotFoundException("Equipo no encontrado"));
+	        	equipo.setNomEqu(solEqu.getEquipo().getNomEqu());
+	        	System.out.println(equipo.getCodEqu());
+	        	solEqu.setCanEqu(solEqu.getCanEqu());        	
+	        	
+	        	solEqu.setSolicitud(solicitud);            
+	        	solicitudEquipoRepository.save(solEqu);        	
+	        	
+	        }
+	    } else {
+	        System.out.println("No hay equipos asociados a esta solicitud.");
+	    }
+	}
+	
+	@Transactional
+	public void deleteSolicitud(String codSol) {
+		
+		List<SolicitudEquipo> equiposAsociados = solicitudEquipoRepository.findBySolicitud_CodSol(codSol);
+	    
+	    for (SolicitudEquipo solEqu : equiposAsociados) {
+	        equipoRepository.delete(solEqu.getEquipo());
+	    }	
+		
+		solicitudEquipoRepository.deleteBySolicitud_CodSol(codSol);
+		requerimientoRepository.deleteBySolicitud_CodSol(codSol);
+		solicitudRepository.deleteById(codSol);
 	}
 	
 	public String generateNuevoCodigo() {
