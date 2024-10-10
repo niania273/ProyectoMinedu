@@ -53,14 +53,14 @@
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Código</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" th:field="*{codSol}"/>
+						<input type="text" class="form-control" th:field="*{codSol}" readonly/>
 						</div>
 					</div>
 					
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Descripción</label>
 						<div class="col-sm-10">
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{desSol}"></textarea>
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{desSol}" readonly></textarea>
 						</div>
 					</div>
 					
@@ -105,14 +105,14 @@
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Código</label>
 					<div class="col-sm-10">
-					<input type="text" class="form-control" th:field="*{codSoli}"/>
+					<input type="text" class="form-control" th:field="*{codSoli}" readonly/>
 					</div>
 					</div>
 					
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">DNI</label>
 					<div class="col-sm-10">
-					<input type="text" class="form-control" th:field="*{dniSoli}">
+					<input type="text" class="form-control" th:field="*{dniSoli}" readonly>
 						</div>
 					</div>
 					
@@ -157,7 +157,7 @@
 	                    <tbody>
 							<tr th:each="equipo, iterStat : *{equipos}">
 							                            <td>
-							                                <input type="text" th:field="*{equipos[__${iterStat.index}__].equipo.codEqu}"/>
+							                                <input class="form-control" type="text" th:field="*{equipos[__${iterStat.index}__].equipo.codEqu}" readonly/>
 							                            </td>
 							                            <td><input class="form-control" type="text" th:field="*{equipos[__${iterStat.index}__].equipo.nomEqu}"/></td>
 							                            <td><input class="form-control" type="number" th:field="*{equipos[__${iterStat.index}__].canEqu}"/></td>
