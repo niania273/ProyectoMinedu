@@ -59,83 +59,83 @@
 	<br>
 
 	<div style="padding: 30px;">
-		<nav style="margin-bottom: 10px;" aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a th:href="@{/}">INICIO</a></li>
-				<li class="breadcrumb-item"><a th:href="@{/requerimientos}">REQUERIMIENTOS</a></li>
-				<li class="breadcrumb-item active" aria-current="page">DETALLES</li>
-			</ol>
-		</nav>
-		<h1>Detalles de Requerimiento</h1>
-		<div style="margin: 20px; padding: 10px; border: 1px solid gray; border-radius: 10px">
-			<form>
-				<div class="row mb-3">
-					<div class=" col-md-6">
-						<label for="inputTitReq">Título</label> <input readonly type="text" class="form-control"
-							id="inputTitReq" th:value="${requerimiento.titReq}" />
+			<nav style="margin-bottom: 10px;" aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a th:href="@{/}">INICIO</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/requerimientos}">REQUERIMIENTOS</a></li>
+					<li class="breadcrumb-item active" aria-current="page">DETALLES</li>
+				</ol>
+			</nav>
+			<h1>Detalles de Requerimiento</h1>
+			<div style="margin: 20px; padding: 10px; border: 1px solid gray; border-radius: 10px">
+				<form>
+					<div class="row mb-3">
+						<div class=" col-md-6">
+							<label for="inputTitReq">Título</label> <input readonly type="text" class="form-control"
+								id="inputTitReq" th:value="${requerimiento.titReq}" />
+						</div>
+						<div class=" col-md-3">
+							<label for="inputFecCre">Fecha de creación</label> <input readonly type="date"
+								class="form-control" id="inputFecCre" th:value="${requerimiento.fecCre}" />
+						</div>
+						<div class=" col-md-3">
+							<label for="inputFecAct">Fecha de Actualización</label> <input readonly type="date"
+								class="form-control background" id="inputFecAct" th:value="${requerimiento.fecAct}" />
+						</div>
 					</div>
-					<div class=" col-md-3">
-						<label for="inputFecCre">Fecha de creación</label> <input readonly type="date"
-							class="form-control" id="inputFecCre" th:value="${requerimiento.fecCre}" />
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<label for="inputDesReq">Descripción</label> <input readonly type="text" class="form-control"
+								id="inputDesReq" th:value="${requerimiento.desReq}" />
+						</div>
+						<div class="col-md-3">
+							<label for="cboCodSol">Código de Solicitud</label><select class="form-select" id="cboCodSol"
+								readonly>
+								<option th:value="${requerimiento.solicitud.codSol}"
+									th:text="${requerimiento.solicitud.codSol}"></option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label for="cboCodSum">Código de Suministrador</label>
+							<select readonly class="form-select" id="cboCodSum">
+								<option th:value="${requerimiento.suministrador.codSum}"
+									th:text="${requerimiento.suministrador.codSum}">
+								</option>
+							</select>
+						</div>
 					</div>
-					<div class=" col-md-3">
-						<label for="inputFecAct">Fecha de Actualización</label> <input readonly type="date"
-							class="form-control background" id="inputFecAct" th:value="${requerimiento.fecAct}" />
-					</div>
-				</div>
-				<div class="row mb-3">
-					<div class="col-md-6">
-						<label for="inputDesReq">Descripción</label> <input readonly type="text" class="form-control"
-							id="inputDesReq" th:value="${requerimiento.desReq}" />
-					</div>
-					<div class="col-md-3">
-						<label for="cboCodSol">Código de Solicitud</label><select class="form-select" id="cboCodSol"
-							readonly>
-							<option th:value="${requerimiento.solicitud.codSol}"
-								th:text="${requerimiento.solicitud.codSol}"></option>
-						</select>
-					</div>
-					<div class="col-md-3">
-						<label for="cboCodSum">Código de Suministrador</label>
-						<select readonly class="form-select" id="cboCodSum">
-							<option th:value="${requerimiento.suministrador.codSum}"
-								th:text="${requerimiento.suministrador.codSum}">
-							</option>
-						</select>
-					</div>
-				</div>
-				<div class="row mb-3">
-					<div class=" col-md-3">
-						<label for="inputPreReq">Presupuesto</label> <input readonly type="text" class="form-control"
-							id="inputPreReq" th:value="${requerimiento.preReq}" />
-					</div>
-					<div class=" col-md-3">
-						<label for="inputPlaEjeReq">Plazo de Ejecución</label> <input readonly
-							type="text" class="form-control" id="inputPlaEjeReq"
-							th:value="${requerimiento.plaEjeReq}" />
-					</div>
-					<div class=" col-md-3">
-						<label for="inputPreReq">Fecha Límite</label> <input readonly type="date" class="form-control"
-							id="inputFecLim" min="2024-07-10" max="2030-12-31" th:value="${requerimiento.fecLim}" />
-					</div>
-					<div class=" col-md-3">
-						<label for="cboEstReq">Estado</label> <select readonly class="form-select" id="cboEstReq">
-							<option th:selected="${requerimiento.estReq == Activo}" th:value="Activo">Activo</option>
-							<option th:selected="${requerimiento.estReq == Inactivo}" th:value="Inactivo">Inactivo
-							</option>
-						</select>
-					</div>
+					<div class="row mb-3">
+						<div class=" col-md-3">
+							<label for="inputPreReq">Presupuesto</label> <input readonly type="text" class="form-control"
+								id="inputPreReq" th:value="${requerimiento.preReq}" />
+						</div>
+						<div class=" col-md-3">
+							<label for="inputPlaEjeReq">Plazo de Ejecución</label> <input readonly
+								type="text" class="form-control" id="inputPlaEjeReq"
+								th:value="${requerimiento.plaEjeReq}" />
+						</div>
+						<div class=" col-md-3">
+							<label for="inputPreReq">Fecha Límite</label> <input readonly type="date" class="form-control"
+								id="inputFecLim" min="2024-07-10" max="2030-12-31" th:value="${requerimiento.fecLim}" />
+						</div>
+						<div class=" col-md-3">
+							<label for="cboEstReq">Estado</label> <select readonly class="form-select" id="cboEstReq">
+								<option th:selected="${requerimiento.estReq == Activo}" th:value="Activo">Activo</option>
+								<option th:selected="${requerimiento.estReq == Inactivo}" th:value="Inactivo">Inactivo
+								</option>
+							</select>
+						</div>
 
-				</div>
-				<div class="row mb-3">
-					<div class="col-md-3 pt-4">
-						<a th:href="@{/requerimientos}" class="btn btn-secondary text-white"
-							style="margin-right: 5px;">Volver</a>
 					</div>
-				</div>
-			</form>
+					<div class="row mb-3">
+						<div class="col-md-3 pt-4">
+							<a th:href="@{/requerimientos}" class="btn btn-secondary text-white"
+								style="margin-right: 5px;">Volver</a>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
 
 
 

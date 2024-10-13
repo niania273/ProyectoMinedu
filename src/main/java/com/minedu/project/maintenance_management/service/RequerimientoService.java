@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.minedu.project.maintenance_management.model.Requerimiento;
-import com.minedu.project.maintenance_management.model.Suministrador;
 import com.minedu.project.maintenance_management.repository.RequerimientoRepository;
 
 import jakarta.transaction.Transactional;
