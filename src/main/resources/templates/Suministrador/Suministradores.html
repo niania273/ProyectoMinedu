@@ -38,7 +38,7 @@
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" th:href="@{/inicio}">Inicio</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item"> 
 						<a class="nav-link" th:href="@{/solicitudes}">Solicitudes</a>
 					</li>
 					<li class="nav-item">
@@ -185,16 +185,27 @@
 	});
 
 	$deleteSumButton.addEventListener('click', () => {
-
 		if (codSuministrador) {
 			if (confirm('Eliminar permanentemente este suministrador?')) {
-				alert('lo elimina epicamente')
-			} else {
-				return;
-			}
-		} else {
-			alert("Por favor, seleccione un suministrador");
-		}
+				fetch(`/suministradores/eliminar?codSuministrador=${encodeURIComponent(codSuministrador)}`, {
+					method: 'DELETE',
+				})
+				.then(response => {
+					if(response.ok){
+						alert('Suministrador Eliminado con éxito');
+						location.reload();
+					}else{
+						alert('Error al eliminar el suministrador');
+					}
+				})
+				.catch(error =>{
+					console.error('Error', error);
+					alert('Hubo un problema con la solicitud de Eliminación.');
+				});
+			} 
+		}else {
+		        alert("Por favor, seleccione un suministrador");
+		} 
 
 	});
 
