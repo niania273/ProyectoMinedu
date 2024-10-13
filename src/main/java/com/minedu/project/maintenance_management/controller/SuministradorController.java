@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.EntityResponse;
 
 import com.minedu.project.maintenance_management.model.Suministrador;
 import com.minedu.project.maintenance_management.service.SuministradorService;
