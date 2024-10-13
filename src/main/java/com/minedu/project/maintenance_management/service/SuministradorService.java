@@ -30,12 +30,11 @@ public class SuministradorService {
 	}
 	
 	/* Eliminar Suministrador */
-	public void deleteSuministrador (String id) {
-		if(suministradorRepository.existsById(id)) {
-			suministradorRepository.deleteById(id);
-		}
-		else {
-			throw new NoSuchElementException("No se encontró el Suministrador para Eliminar con el Siguente ID: " + id);
-		}
+	public void deleteSuministrador(String id) {
+	    if (suministradorRepository.existsById(id)) {
+	        suministradorRepository.deleteById(id);
+	    } else {
+	        throw new NoSuchElementException("No se encontró el Suministrador para eliminar con el siguiente ID: " + id);
+	    }
 	}
 }
