@@ -24,6 +24,19 @@
 		opacity: 1;
 	}
 </style>
+<body>
+		<!--MENSAJES DE RESPUESTA A SOLICITUDES-->
+		
+		<!-- EXITO -->
+	    <div th:if="${message}" class="alert alert-success" role="alert">
+	        <span th:text="${message}"></span>
+	    </div>
+
+	    <!--ERROR -->
+	    <div th:if="${error}" class="alert alert-danger" role="alert">
+	        <span th:text="${error}"></span>
+	    </div>
+	
 <nav class="navbar navbar-expand-lg navbar" style="background-color: #F1F1F1;">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="#"> <img src="https://www.ugellaconvencion.gob.pe/lc/imagenes/logo-otic.png"
@@ -142,7 +155,7 @@
 	$updateReqButton.addEventListener('click', () => {
 
 		if (codRequerimiento) {
-			window.location.href = `/requerimientos/actualizar?codRequerimiento=${encodeURIComponent(codRequerimiento)}`;
+			window.location.href = `/requerimientos/actualizar/${encodeURIComponent(codRequerimiento)}`;
 		} else {
 			alert("Por favor, seleccione un requerimiento");
 		}
@@ -152,7 +165,7 @@
 	$detailsReqButton.addEventListener('click', () => {
 
 		if (codRequerimiento) {
-			window.location.href = `/requerimientos/detalles?codRequerimiento=${encodeURIComponent(codRequerimiento)}`;
+			window.location.href = `/requerimientos/detalles/${encodeURIComponent(codRequerimiento)}`;
 		} else {
 			alert("Por favor, seleccione un requerimiento");
 		}
@@ -163,7 +176,9 @@
 
 		if (codRequerimiento) {
 			if(confirm('Eliminar permanentemente este requerimiento?')){
-				alert('lo elimina epicamente')
+				
+				window.location.href = `/requerimientos/eliminar/${encodeURIComponent(codRequerimiento)}`;
+				
 			} else {
 				return;				
 			}
