@@ -1,23 +1,24 @@
 package com.minedu.project.maintenance_management.controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.minedu.project.maintenance_management.model.Equipo;
-import com.minedu.project.maintenance_management.model.Solicitud;
 import com.minedu.project.maintenance_management.model.SolicitudDTO;
 import com.minedu.project.maintenance_management.model.SolicitudEquipo;
-import com.minedu.project.maintenance_management.service.EquipoService;
-import com.minedu.project.maintenance_management.service.SolicitanteService;
+import com.minedu.project.maintenance_management.service.ReporteService;
 import com.minedu.project.maintenance_management.service.SolicitudEquipoService;
 import com.minedu.project.maintenance_management.service.SolicitudService;
 
-import jakarta.validation.Valid;
+import net.sf.jasperreports.engine.JRException;
 
 @Controller
 @RequestMapping("/solicitudes")
@@ -27,13 +28,10 @@ public class SolicitudController {
 	private SolicitudService solicitudService;
 	
 	@Autowired
-	private SolicitanteService solicitanteService;
-	
-	@Autowired
 	private SolicitudEquipoService solicitudEquipoService;
 	
 	@Autowired
-	private EquipoService equipoService;
+	private ReporteService reporteService;
 	
 	@GetMapping
 	public String getSolicitudes(Model model) {
@@ -41,60 +39,6 @@ public class SolicitudController {
 		model.addAttribute("solicitudes", solicitudService.findAllSolicitudes());
 
 		return "Solicitudes/Solicitudes";
-	}
-	
-	@GetMapping("/crear")
-	public String createSolicitud(Model model) {
-	/*	String codigoSolicitud = solicitudService.generateNuevoCodigo();
-		String codigoSolicitante = solicitanteService.generateNuevoCodigo();
-		
-		SolicitudDTO solicitudDTO = new SolicitudDTO();
-		solicitudDTO.setEquipos(new ArrayList<>());
-	    solicitudDTO.setListaEquipos(new ArrayList<>());
-		solicitudDTO.setCodSol(codigoSolicitud);
-		solicitudDTO.setCodSoli(codigoSolicitante);
-		
-		List<Equipo> listEquipo = new ArrayList<Equipo>();
-		
-		for (int i = 0; i < 5; i++) {
-			Equipo equipo = new Equipo();
-			String codigo = equipoService.generateNuevoCodigo();
-			equipo.setCodEqu(codigo);
-			listEquipo.add(equipo);
-		}
-		//solicitudDTO.setListaEquipos(listEquipo);
-		
-		model.addAttribute("solicitudDTO", solicitudDTO);*/
-		return "Solicitudes/GenerarSolicitud";
-	}
-	
-	@PostMapping("/crear")
-	public String createSolicitud(@Valid @ModelAttribute SolicitudDTO solicitudDTO) {
-		
-		/*List<SolicitudEquipo> solicitudEquipos = new ArrayList<>();
-		
-		for (int i = 0; i < solicitudDTO.getListaEquipos().size(); i++) {
-			Equipo equipo = solicitudDTO.getListaEquipos().get(i);
-			Byte cantidad = solicitudDTO.getCanEqu().get(i);
-			
-			if (cantidad > 0) {
-				SolicitudEquipo solicitudEquipo = new SolicitudEquipo();
-				solicitudEquipo.setEquipo(equipo);
-				solicitudEquipo.setCanEqu(cantidad);
-				solicitudEquipos.add(solicitudEquipo);
-			}
-		}
-		
-		solicitudDTO.setEquipos(solicitudEquipos);
-		
-		Solicitud solicitud = solicitudService.saveSolicitud(solicitudDTO);
-		
-		for (SolicitudEquipo solicitudEquipo : solicitudEquipos) {
-            solicitudEquipo.setSolicitud(solicitud);
-            solicitudEquipoService.saveSolicitudEquipo(solicitudEquipo);
-        }*/
-		
-		return "redirect:/solicitudes";
 	}
 	
 	@GetMapping("/ver/{codSol}")
@@ -160,4 +104,20 @@ public class SolicitudController {
 		
 		return "redirect:/solicitudes";
 	}
+	
+	@GetMapping("/exportar/{formato}")
+	public ResponseEntity<byte[]> exportarSolicitud(@PathVariable String formato) throws JRException, IOException, SQLException {
+
+	    byte[] reporte = reporteService.exportarSolicitud(formato);
+
+	    HttpHeaders headers = new HttpHeaders();
+	    String extension = formato.equals("excel") ? "xlsx" : 
+				           formato.equals("csv") ? "csv" : 
+				           formato.equals("doc") ? "docx" : 
+				           formato;
+	    headers.add("Content-Disposition", "attachment; filename=reporte_solicitudes." + extension);
+
+	    return new ResponseEntity<>(reporte, headers, HttpStatus.OK);
+	}
+
 }

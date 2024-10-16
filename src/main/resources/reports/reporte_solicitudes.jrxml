@@ -1,0 +1,248 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="reporte_solicitudes" language="java" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d4a1d5eb-82dd-412f-a620-202e4bdf9dba">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter - Reportes"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value="YFNPTElDSVRBTlRFYCAsMTM1LDgwLDM3ZDlmM2Y5LTdmYTctNDU3MS1iMmVmLTdjMTk0M2VkM2Y1&#xa;ZTtgU09MSUNJVFVEYCAsMTUsMTUsYTMyZDMyMjEtMDgxNC00ODU3LTg4NjgtMzJjYzIxNzdjNDlj&#xa;Ow=="/>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<topPen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<leftPen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<bottomPen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<rightPen lineWidth="0.5" lineColor="#B0B0B0"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#FF8547">
+		<box>
+			<pen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<topPen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<leftPen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<bottomPen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<rightPen lineWidth="0.5" lineColor="#B0B0B0"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<topPen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<leftPen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<bottomPen lineWidth="0.5" lineColor="#B0B0B0"/>
+			<rightPen lineWidth="0.5" lineColor="#B0B0B0"/>
+		</box>
+	</style>
+	<dataset name="tableDataset" uuid="dfb4cd42-43f5-465b-851c-b1cdc539f241">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter - Reportes"/>
+		<query language="SQL"><![CDATA[SELECT `SOLICITUD`.`COD_SOL`,
+	CONCAT( SOLICITANTE.NOM_SOLI," ",SOLICITANTE.APE_SOLI),
+	`SOLICITUD`.`DES_SOL`,
+	`SOLICITUD`.`CAT_SOL`,
+	`SOLICITUD`.`NIV_PRI`,
+	`SOLICITUD`.`EST_SOL`,
+	`SOLICITUD`.`FEC_CRE`,
+	`SOLICITUD`.`FEC_ACT`
+FROM `SOLICITUD`
+	INNER JOIN `SOLICITANTE` ON 
+	 `SOLICITUD`.`COD_SOLI` = `SOLICITANTE`.`COD_SOLI`]]></query>
+		<field name="COD_SOL" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="COD_SOL"/>
+			<property name="com.jaspersoft.studio.field.label" value="COD_SOL"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="CONCAT( SOLICITANTE.NOM_SOLI,&quot; &quot;,SOLICITANTE.APE_SOLI)" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="CONCAT( SOLICITANTE.NOM_SOLI,&quot; &quot;,SOLICITANTE.APE_SOLI)"/>
+			<property name="com.jaspersoft.studio.field.label" value="CONCAT( SOLICITANTE.NOM_SOLI,&quot; &quot;,SOLICITANTE.APE_SOLI)"/>
+		</field>
+		<field name="DES_SOL" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DES_SOL"/>
+			<property name="com.jaspersoft.studio.field.label" value="DES_SOL"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="CAT_SOL" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="CAT_SOL"/>
+			<property name="com.jaspersoft.studio.field.label" value="CAT_SOL"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="NIV_PRI" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="NIV_PRI"/>
+			<property name="com.jaspersoft.studio.field.label" value="NIV_PRI"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="EST_SOL" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="EST_SOL"/>
+			<property name="com.jaspersoft.studio.field.label" value="EST_SOL"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="FEC_CRE" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="FEC_CRE"/>
+			<property name="com.jaspersoft.studio.field.label" value="FEC_CRE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="FEC_ACT" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="FEC_ACT"/>
+			<property name="com.jaspersoft.studio.field.label" value="FEC_ACT"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+	</dataset>
+	<query language="sql"><![CDATA[]]></query>
+	<title height="170">
+		<element kind="frame" uuid="6321f5e3-86eb-444f-acc1-8daaaa0d6c60" mode="Opaque" x="-20" y="-20" width="595" height="180" backcolor="#FFFFFF">
+			<element kind="staticText" uuid="9e48917a-7b59-4ffd-baad-725f45563194" x="80" y="80" width="430" height="30" forecolor="#050505" fontSize="16.0" bold="true" hTextAlign="Center">
+				<text><![CDATA[Informe de Solicitudes de Servicios de Mantenimiento]]></text>
+			</element>
+			<element kind="staticText" uuid="0a399baa-bad3-4b1a-9fe3-bb1c563e6a27" x="105" y="30" width="470" height="20" forecolor="#030303" fontSize="12.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Oficina de Tecnologías de Información y Comunicaciones (OTIC)]]></text>
+			</element>
+			<element kind="image" uuid="159aff7f-7235-4127-bff1-22cedbbbe2ca" x="20" y="10" width="200" height="60">
+				<expression><![CDATA["https://www.petroperu.com.pe/Storage/modsnw/image/397-o0Xd9Jm0Pp6Fq7Q.jpg"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="component" uuid="b2c67ac9-a22e-40fe-954c-3c713a41f0c0" x="20" y="180" width="555" height="210">
+				<component kind="table">
+					<datasetRun uuid="915dd339-270c-43b2-aa14-c82aa1602e67" subDataset="tableDataset">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<column kind="single" uuid="fe3ee54d-8098-4610-b77f-bb167a9bfc16" width="45">
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="fb18b101-d119-43a0-9f01-5482d8586471" mode="Transparent" x="0" y="0" width="45" height="30" forecolor="#FFFFFF" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[CÓDIGO]]></text>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="73c7a7a0-a838-490b-abd7-49407c359c00" key="" x="0" y="0" width="45" height="30" fontName="Arial" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{COD_SOL}]]></expression>
+								<box leftPadding="2"/>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+					</column>
+					<column kind="single" uuid="0170e7eb-5f8d-42bc-b0b2-98df3d8db5e5" width="80">
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="6b1a0ca9-b187-4cca-8576-571d8873f8ea" mode="Transparent" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[SOLICITANTE]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="c49fc8f3-49b8-4856-9378-a4a971ed3d46" key="" x="0" y="0" width="80" height="30" fontName="Arial" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{CONCAT( SOLICITANTE.NOM_SOLI," ",SOLICITANTE.APE_SOLI)}]]></expression>
+								<box leftPadding="2"/>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+					</column>
+					<column kind="single" uuid="a9d53b63-e861-4e6b-877e-b4fd46046ffa" width="125">
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="dd1f37bf-d62c-460a-8972-8d70a38eae58" mode="Transparent" x="0" y="0" width="125" height="30" forecolor="#FFFFFF" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[DESCRIPCIÓN]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="4ef141da-4882-4f3a-a60e-0b7fe65e7052" key="" x="0" y="0" width="125" height="30" fontName="Arial" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{DES_SOL}]]></expression>
+								<box leftPadding="2"/>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					</column>
+					<column kind="single" uuid="3dbe1c10-0aeb-4795-806d-6d0820d66201" width="58">
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="9756c777-4a93-4c51-a94d-6145a7ab1df9" mode="Transparent" x="0" y="0" width="58" height="30" forecolor="#FFFFFF" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[CATEGORÍA]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="fcaa1c8b-763d-461b-8c34-1ba8c2ca8d0c" key="" x="0" y="0" width="58" height="30" fontName="Arial" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{CAT_SOL}]]></expression>
+								<box leftPadding="2"/>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					</column>
+					<column kind="single" uuid="d2be61fa-ec14-4f7b-b5bb-3f2f53f3b84b" width="52">
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="fc1f076d-0643-4443-bb50-fb3955f0937c" mode="Transparent" x="0" y="0" width="52" height="30" forecolor="#FFFFFF" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[PRIORIDAD]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="de88de59-a5a8-4961-a2b3-77de27d12fcc" key="" x="0" y="0" width="52" height="30" fontName="Arial" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{NIV_PRI}]]></expression>
+								<box leftPadding="2"/>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+					</column>
+					<column kind="single" uuid="379cbc4c-fee1-48f1-90c8-99d2a25445ba" width="45">
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="650cec4f-4336-4b5d-b64c-ef6016cfc924" mode="Transparent" x="0" y="0" width="45" height="30" forecolor="#FFFFFF" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[ESTADO]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="d69999a7-5db6-460f-ad07-06c9b1f8d685" key="" x="0" y="0" width="45" height="30" fontName="Arial" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{EST_SOL}]]></expression>
+								<box leftPadding="2"/>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+					</column>
+					<column kind="single" uuid="8114fc44-310f-4b27-911e-359197e09ad9" width="70">
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="908eed0a-82d1-4402-b6e7-94025d6d1e6e" mode="Transparent" x="0" y="0" width="70" height="30" forecolor="#FFFFFF" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[FECHA DE CREACIÓN]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="0bd760a2-b9dc-46ad-b504-2ccc7d8e42cd" key="" x="0" y="0" width="70" height="30" fontName="Arial" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{FEC_CRE}]]></expression>
+								<box leftPadding="2"/>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+					</column>
+					<column kind="single" uuid="4e500bc7-447d-44e9-88b0-d5c000c0762c" width="82">
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="8090c379-25da-422d-aace-97469f3138f4" mode="Transparent" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[FECHA DE ACTUALIZACIÓN]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="10ae3394-4095-432c-85f2-72b5fd62d9a2" key="" x="0" y="0" width="82" height="30" fontName="Arial" fontSize="7.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{FEC_ACT}]]></expression>
+								<box leftPadding="2"/>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+					</column>
+				</component>
+				<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+				<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+				<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+			</element>
+			<element kind="staticText" uuid="c59292f2-ebba-4d27-8bac-236c7c77f304" x="20" y="110" width="555" height="60" hTextAlign="Justified" vTextAlign="Middle">
+				<text><![CDATA[A continuación, se presenta el reporte de las solicitudes de mantenimiento generadas por la plataforma de atención de mantenimientos a cargo de la Unidad de Atención al Usuario y la Oficina de Logística del Ministerio de Educación. Este reporte incluye información sobre la descripción del servicio solicitado, el solicitante, la categoría, la prioridad, el estado, la fecha de creación y la fecha de actualización de cada solicitud.]]></text>
+			</element>
+		</element>
+	</title>
+	<pageHeader height="13"/>
+	<summary height="280" splitType="Stretch">
+		<element kind="textField" uuid="fc593335-5cbf-4caf-97b3-ff897c676bde" x="0" y="267" width="100" height="13" fontSize="8.0" pattern="MMMM d, yyyy" vTextAlign="Middle">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="textField" uuid="fed27553-a6c4-4a8a-9056-2f6f2589a3e5" mode="Transparent" x="0" y="267" width="555" height="13" backcolor="#FFFFFF" fontSize="8.0" hTextAlign="Right">
+			<expression><![CDATA["Página "+$V{PAGE_NUMBER}]]></expression>
+		</element>
+		<property name="local_mesure_unitheight" value="pixel"/>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</summary>
+</jasperReport>

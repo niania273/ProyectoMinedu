@@ -70,7 +70,7 @@
 		<div>
 		<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb" style="color: gray; font-size: 15px; font-weight: 600;">
-			    <li class="breadcrumb-item"><a th:href="@{/}">INICIO</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/inicio}">INICIO</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">SOLICITUDES</li>
 			  </ol>
 			</nav>
@@ -78,23 +78,34 @@
 	<div>
 		<h1 style="position:absolute">Solicitudes</h1>
 	<div style="float: left; width: 15%; position:relative; top: 65px">
-		<a class="btn btn-secondary w-100 my-2" th:href="@{/solicitudes/crear}">
-			<i class="bi bi-plus-circle"></i>
-			Generar
-		</a>
-		<br>
 		<a class="btn btn-success w-100 my-2" id="selectSolButton">
-							<i class="bi bi-file-earmark-text"></i>
-							Consultar
+			<i class="bi bi-file-earmark-text"></i>
+			Consultar
 		</a>
 		<a class="btn btn-primary w-100 my-2" id="updateSolButton">
-					<i class="bi bi-pencil"></i>
-					Actualizar
-				</a>
-		<a class="btn btn-warning w-100 my-2" id="exportSolButton">
+			<i class="bi bi-pencil"></i>
+			Actualizar
+		</a>
+		<!--<a class="btn btn-primary" th:href="@{/solicitudes/exportar}">
+			Exportar
+		</a>-->
+		<div class="dropdown">
+		<a id="exportSolButton" class="btn btn-warning w-100 my-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 			<i class="bi bi-download"></i>
 			Exportar
 		</a>
+		<ul class="dropdown-menu w-100">
+		    <li><a class="dropdown-item" href="#" onclick="exportar('pdf')">PDF</a></li>
+		    <li><a class="dropdown-item" href="#" onclick="exportar('excel')">Excel</a></li>
+		    <li><a class="dropdown-item" href="#" onclick="exportar('csv')">CSV</a></li>
+		    <li><a class="dropdown-item" href="#" onclick="exportar('html')">HTML</a></li>
+		</ul>
+
+		<div class="alert alert-warning alert-dismissible fade show" role="alert" id="mensaje" style="display: none;">
+		  <strong>¡Éxito!</strong> Su reporte ha sido generado.
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		</div>
 		<a class="btn btn-danger w-100 my-2" id="deleteSolButton">
 					<i class="bi bi-trash"></i>	
 					Eliminar
@@ -137,105 +148,132 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 <script>
-const $ = el => document.querySelector(el);
-const $$ = el => document.querySelectorAll(el);
+		
+	const $ = el => document.querySelector(el);
+	const $$ = el => document.querySelectorAll(el);
 
-const $body = $('tbody');
-const $selectSolButton = $('#selectSolButton')
-const $updateSolButton = $('#updateSolButton')
-const $deleteSolButton = $('#deleteSolButton')
-var codSol = "";  // Declarar la variable
+	const $body = $('tbody');
+	const $selectSolButton = $('#selectSolButton')
+	const $updateSolButton = $('#updateSolButton')
+	const $deleteSolButton = $('#deleteSolButton')
+	var codSol = "";  // Declarar la variable
 
-// Agregar un listener al documento para manejar clics en el cuerpo y fuera de la tabla
-document.addEventListener('click', event => {
-    const tr = event.target.closest('tr');
+	// Agregar un listener al documento para manejar clics en el cuerpo y fuera de la tabla
+	document.addEventListener('click', event => {
+	    const tr = event.target.closest('tr');
 
-    // Si se hizo clic en una fila
-    if (tr && $body.contains(tr)) {
-        // Verificar si la fila ya tiene la clase 'active'
-        const isActive = tr.classList.contains('active');
+	    // Si se hizo clic en una fila
+	    if (tr && $body.contains(tr)) {
+	        // Verificar si la fila ya tiene la clase 'active'
+	        const isActive = tr.classList.contains('active');
 
-        // Remover la clase de cualquier otra fila que esté activa
-        $body.querySelectorAll('tr').forEach(row => {
-            row.classList.remove('active');
-        });
+	        // Remover la clase de cualquier otra fila que esté activa
+	        $body.querySelectorAll('tr').forEach(row => {
+	            row.classList.remove('active');
+	        });
 
-        // Si la fila no estaba activa, agregar la clase 'active' y obtener el código del requerimiento; de lo contrario, eliminarla
-        if (!isActive) {
-            tr.classList.add('active');
-            codSol = tr.querySelector('td').textContent;
-        } else {
-            // Si la fila ya estaba activa, se elimina la clase y se limpia la variable
-            codSol = ""; // Limpia la variable
-        }
+	        // Si la fila no estaba activa, agregar la clase 'active' y obtener el código del requerimiento; de lo contrario, eliminarla
+	        if (!isActive) {
+	            tr.classList.add('active');
+	            codSol = tr.querySelector('td').textContent;
+	        } else {
+	            // Si la fila ya estaba activa, se elimina la clase y se limpia la variable
+	            codSol = ""; // Limpia la variable
+	        }
 
-    }
-});
-
-//Crear Listeners para manejar botones
-$selectSolButton.addEventListener('click', () => {
-	
-	if(codSol) {
-		window.location.href=`/solicitudes/ver/${encodeURIComponent(codSol)}`;
-	} else {
-		alert("Por favor, seleccione una solicitud");
-	}
-	
-});
-
-$updateSolButton.addEventListener('click', () => {
-	
-	if(codSol) {
-		window.location.href=`/solicitudes/editar/${encodeURIComponent(codSol)}`;
-	} else {
-		alert("Por favor, seleccione una solicitud");
-	}
-	
-});
-
-$deleteSolButton.addEventListener('click', () => {
-	
-	if(codSol) {
-		window.location.href=`/solicitudes/eliminar/${encodeURIComponent(codSol)}`;
-	} else {
-		alert("Por favor, seleccione una solicitud");
-	}
-	
-});
-
-new DataTable('#tableSolicitudes', {
-		layout: {
-			bottomEnd: {
-				paging: {
-					firstLast: false
-				}
-			}
-		},
-		lengthChange: false,
-		info: false
+	    }
 	});
 
-const searchInput = document.getElementById('dt-search-0');
-searchInput.classList.add('form-control');
-searchInput.style.width = '15%';
-searchInput.placeholder = 'Buscar...';
+	//Crear Listeners para manejar botones
+	$selectSolButton.addEventListener('click', () => {
+		
+		if(codSol) {
+			window.location.href=`/solicitudes/ver/${encodeURIComponent(codSol)}`;
+		} else {
+			alert("Por favor, seleccione una solicitud");
+		}
+		
+	});
 
-const inputGroup = document.querySelector('.dt-search');
+	$updateSolButton.addEventListener('click', () => {
+		
+		if(codSol) {
+			window.location.href=`/solicitudes/editar/${encodeURIComponent(codSol)}`;
+		} else {
+			alert("Por favor, seleccione una solicitud");
+		}
+		
+	});
 
-if (inputGroup) {
+	$deleteSolButton.addEventListener('click', () => {
+		
+		if(codSol) {
+			window.location.href=`/solicitudes/eliminar/${encodeURIComponent(codSol)}`;
+		} else {
+			alert("Por favor, seleccione una solicitud");
+		}
+		
+	});
 
-	inputGroup.style.display = 'flex';
-	inputGroup.style.justifyContent = 'flex-end';
-	
-    const label = Array.from(inputGroup.querySelectorAll('label')).find(label => label.textContent.trim() === 'Search:');
-    
-    if (label) {
-        label.remove();
-    }
-}
+	new DataTable('#tableSolicitudes', {
+			layout: {
+				bottomEnd: {
+					paging: {
+						firstLast: false
+					}
+				}
+			},
+			lengthChange: false,
+			info: false
+		});
 
-$('#keySearch').addEventListener('keyup', function() {
-    table.search(this.value);
-});
+	const searchInput = document.getElementById('dt-search-0');
+	searchInput.classList.add('form-control');
+	searchInput.style.width = '15%';
+	searchInput.placeholder = 'Buscar...';
+
+	const inputGroup = document.querySelector('.dt-search');
+
+	if (inputGroup) {
+
+		inputGroup.style.display = 'flex';
+		inputGroup.style.justifyContent = 'flex-end';
+		
+	    const label = Array.from(inputGroup.querySelectorAll('label')).find(label => label.textContent.trim() === 'Search:');
+	    
+	    if (label) {
+	        label.remove();
+	    }
+	}
+
+	$('#keySearch').addEventListener('keyup', function() {
+	    table.search(this.value);
+	});
+		
+		//Manejar exportaciones y mostrar mensaje de éxito		
+		function exportar(formato) {
+		
+		    fetch(`/solicitudes/exportar/${formato}`)
+		        .then(response => {
+		            if (response.ok) {
+		                return response.blob();
+		            }
+		            throw new Error('Error al exportar');
+		        })
+		        .then(blob => {
+		            const url = window.URL.createObjectURL(blob);
+		            const a = document.createElement('a');
+		            a.href = url;
+		            a.download = `reporte_solicitudes.${formato === 'excel' ? 'xlsx' : formato === 'csv' ? 'csv' : formato === 'doc' ? 'docx' : 'pdf'}`;
+		            document.body.appendChild(a);
+		            a.click();
+		            a.remove();
+		
+		            document.getElementById('mensaje').style.display = 'block';
+		        })
+		        .catch(error => {
+		            console.error('Error:', error);
+		        });
+		}
 </script>
 </html>
