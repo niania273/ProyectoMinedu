@@ -31,10 +31,10 @@
 		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        <li class="nav-item">
-	          <a class="nav-link active" aria-current="page" th:href="@{/inicio}">Inicio</a>
+	          <a class="nav-link active" th:href="@{/inicio}">Inicio</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" th:href="@{/solicitudes}">Solicitudes</a>
+	          <a class="nav-link" aria-current="page" th:href="@{/solicitudes}">Solicitudes</a>
 	        </li>
 			<li class="nav-item">
 			  <a class="nav-link" th:href="@{/requerimientos}">Requerimientos</a>
@@ -83,13 +83,10 @@
 			<i class="bi bi-file-earmark-text"></i>
 			Consultar
 		</a>
-		<a class="btn btn-primary w-100 my-2" id="updateSolButton">
+		<a class="btn btn-primary w-100 my-2" id="updateSolButton" sec:authorize="hasAuthority('USAU')">
 			<i class="bi bi-pencil"></i>
 			Actualizar
 		</a>
-		<!--<a class="btn btn-primary" th:href="@{/solicitudes/exportar}">
-			Exportar
-		</a>-->
 		<div class="dropdown">
 		<a id="exportSolButton" class="btn btn-warning w-100 my-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 			<i class="bi bi-download"></i>

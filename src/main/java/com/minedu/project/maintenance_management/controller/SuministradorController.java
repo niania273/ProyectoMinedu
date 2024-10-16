@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +28,14 @@ public class SuministradorController {
 		return "Suministrador/Suministradores";
 	}
 	
+	@PreAuthorize("hasAuthority('LOG')")
 	@GetMapping ("/registrar")
 	public String showRegistrarSuministrador(Model model) {
 		model.addAttribute("suministrador", new Suministrador());
 		return "Suministrador/RegistrarSuministrador";
 	}
 	
+	@PreAuthorize("hasAuthority('LOG')")
 	@GetMapping("/editar")
 	public String showEditarSuministrador(@RequestParam("codSuministrador") String ID, Model model) {
 	    Suministrador suministrador = service.findSuministradorById(ID);
@@ -60,6 +63,7 @@ public class SuministradorController {
 
 	
 	/*
+	@PreAuthorize("hasAuthority('LOG')")
 	@DeleteMapping("/eliminar")
 	public String eliminarSuministrador(@ModelAttribute("codSuministrador")String ID, Model model) {
 		Suministrador suministrador = service.findSuministradorById(ID);
