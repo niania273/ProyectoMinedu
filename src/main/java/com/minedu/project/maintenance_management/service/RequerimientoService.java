@@ -40,7 +40,6 @@ public class RequerimientoService {
 	public Requerimiento updateRequerimiento(Requerimiento requerimiento) {
 		
         Optional<Requerimiento> existingRequerimientoOpt = requerimientoRepository.findById(requerimiento.getCodReq());
-        System.out.println("SERVICE");
         
         if (!existingRequerimientoOpt.isPresent()) {
             throw new RuntimeException("Requerimiento no encontrado con el código: " + requerimiento.getCodReq());
@@ -58,8 +57,6 @@ public class RequerimientoService {
         
         existingRequerimiento.setSuministrador(requerimiento.getSuministrador());
         System.out.println(existingRequerimiento.getSolicitud().getCodSol());
-        System.out.println("Updating requerimiento: " + requerimiento);
-        System.out.println("Existing requerimiento before update: " + existingRequerimiento);
 
         
         return requerimientoRepository.save(existingRequerimiento);
