@@ -23,7 +23,7 @@ public class AppUserService implements UserDetailsService{
 		if (appUser != null) {
 			var springUser = User.withUsername(appUser.getEmaUsu())
 					.password(appUser.getConUsu())
-					.roles(appUser.getRolUsu())
+					.authorities(appUser.getRolUsu())
 					.build();
 			return springUser;
 		}

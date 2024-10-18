@@ -3,6 +3,9 @@ package com.minedu.project.maintenance_management.controller;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +61,7 @@ public class AccountController {
 			nuevoUsuario.setNomUsu(registerDTO.getNomUsu());
 			nuevoUsuario.setApeUsu(registerDTO.getApeUsu());
 			nuevoUsuario.setEmaUsu(registerDTO.getEmaUsu());
-			nuevoUsuario.setRolUsu("USAU");
+			nuevoUsuario.setRolUsu(registerDTO.getRolUsu());
 			nuevoUsuario.setFecCre(new Date(0));
 			nuevoUsuario.setConUsu(bCryptEncoder.encode(registerDTO.getConUsu()));
 			
@@ -73,5 +76,22 @@ public class AccountController {
 		}
 		
 		return "Register";
+	}
+	
+	@GetMapping("/perfil")
+	public String mostrarPerfil(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		String email = "";
+		if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            email = userDetails.getUsername();
+		}
+		
+		AppUser appUser = appUserRepository.findByEmaUsu(email);
+		
+		model.addAttribute("usuario", appUser);
+		
+		return "Perfil";
 	}
 }

@@ -83,17 +83,17 @@
 			<h1 style="position: absolute">Suministradores</h1>
 
 			<div style="float: left; width: 15%; position:relative; top: 65px">
-				<a th:href="@{/suministradores/registrar}" class="btn btn-secondary w-100 mb-3"><i
+				<a th:href="@{/suministradores/registrar}" class="btn btn-secondary w-100 mb-3" sec:authorize="hasAuthority('LOG')"><i
 						class="bi bi-plus-square"></i>Generar</a>
 
-				<a class="btn btn-primary w-100 mb-3" id="updateSumButton"><i
+				<a class="btn btn-primary w-100 mb-3" id="updateSumButton" sec:authorize="hasAuthority('LOG')"><i
 						class="bi bi-pencil-square"></i>Actualizar</a>
 
 				<a class="btn btn-success w-100 mb-3" id="detailsSumButton"><i class="bi bi-card-list"></i>Detalles</a>
 				<a class="btn btn-warning w-100 mb-3" id="exportSolButton">
 							<i class="bi bi-download"></i>
 							Exportar
-				<a class="btn btn-danger w-100 mb-3" id="deleteSumButton"><i class="bi bi-trash3"></i>Eliminar</a>
+				<a class="btn btn-danger w-100 mb-3" id="deleteSumButton"><i class="bi bi-trash3" sec:authorize="hasAuthority('LOG')"></i>Eliminar</a>
 			</div>
 
 			<div style="width: 80%; float: right;">

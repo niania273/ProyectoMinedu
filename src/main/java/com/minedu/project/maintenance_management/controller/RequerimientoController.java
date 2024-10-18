@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,7 @@ public class RequerimientoController {
 		return "Requerimiento/Requerimientos";
 	}
 	
+	@PreAuthorize("hasAuthority('USAU')")
 	@GetMapping("/generar")
 	public String generarRequerimientos(Model model) {
 		model.addAttribute("lstSolicitudes", solService.findAllSolicitudes());
@@ -44,6 +46,7 @@ public class RequerimientoController {
 		return "Requerimiento/GenerarRequerimiento";
 	}
 	
+	@PreAuthorize("hasAuthority('USAU')")
 	@GetMapping("/actualizar/{codRequerimiento}")
 	public String actualizarRequerimientos(@PathVariable("codRequerimiento") String codRequerimiento, Model model) {
 	    
@@ -110,6 +113,7 @@ public class RequerimientoController {
 		return "redirect:/requerimientos";
 	}
 	
+	@PreAuthorize("hasAuthority('USAU')")
 	@GetMapping("/eliminar/{codRequerimiento}")
 	public String eliminarRequerimiento(@PathVariable("codRequerimiento") String codRequerimiento, Model model) {
 		try	{

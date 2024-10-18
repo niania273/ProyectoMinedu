@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class InicioController {
 	
-	@GetMapping({"", "/", "ingreso"})
+	@GetMapping({"/", "/ingreso"})
 	public String ingreso() {
 		return "Ingreso";
 	}
 	
-	@GetMapping({"/inicio"})
+	@GetMapping("/inicio")
 	public String inicio() {
 		return "Inicio";
 	}
 	
-	@GetMapping({"/perfil"})
-	public String perfil() {
-		return "Perfil";
-	}
+	@GetMapping("/custom-login")
+    public String mostrarLogin() {
+        return "IniciarSesion";
+    }
 }
