@@ -1,7 +1,6 @@
 package com.minedu.project.maintenance_management.controller;
 
-import java.sql.Date;
-
+import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -62,7 +61,7 @@ public class AccountController {
 			nuevoUsuario.setApeUsu(registerDTO.getApeUsu());
 			nuevoUsuario.setEmaUsu(registerDTO.getEmaUsu());
 			nuevoUsuario.setRolUsu(registerDTO.getRolUsu());
-			nuevoUsuario.setFecCre(new Date(0));
+			nuevoUsuario.setFecCre(java.sql.Date.valueOf(LocalDate.now()));
 			nuevoUsuario.setConUsu(bCryptEncoder.encode(registerDTO.getConUsu()));
 			
 			appUserRepository.save(nuevoUsuario);
