@@ -55,6 +55,7 @@ public class SolicitudService {
 		Solicitud solicitud = solicitudRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("SolicitudDTO no encontrada:" + id));
 		
 		SolicitudDTO solicitudDTO = new SolicitudDTO();
+		solicitudDTO.setCodSol(solicitud.getCodSol());
 		solicitudDTO.setDesSol(solicitud.getDesSol());
 		solicitudDTO.setCatSol(solicitud.getCatSol());
 		solicitudDTO.setNivPri(solicitud.getNivPri());
@@ -69,30 +70,6 @@ public class SolicitudService {
 		solicitudDTO.setTelSoli(solicitante.getTelSoli());
 		
 		return solicitudDTO;
-	}
-	
-	public Solicitud saveSolicitud(SolicitudDTO solicitudDTO) {
-		
-		Solicitante solicitante = new Solicitante();
-		solicitante.setCodSoli(solicitudDTO.getCodSoli());
-		solicitante.setDniSoli(solicitudDTO.getDniSoli());
-		solicitante.setNomSoli(solicitudDTO.getNomSoli());
-		solicitante.setApeSoli(solicitudDTO.getApeSoli());
-		solicitante.setEmaSoli(solicitudDTO.getEmaSoli());
-		solicitante.setTelSoli(solicitudDTO.getTelSoli());
-		
-		Solicitante savedSolicitante = solicitanteRepository.save(solicitante);
-		
-		Solicitud solicitud = new Solicitud();
-		solicitud.setCodSol(solicitudDTO.getCodSol());
-		solicitud.setDesSol(solicitudDTO.getDesSol());
-		solicitud.setCatSol(solicitudDTO.getCatSol());
-		solicitud.setNivPri(solicitudDTO.getNivPri());
-		solicitud.setEstSol(solicitudDTO.getEstSol());
-		
-		solicitud.setSolicitante(savedSolicitante);
-		
-		return solicitudRepository.save(solicitud);
 	}
 	
 	@Transactional
