@@ -40,7 +40,7 @@ public class RequerimientoService {
 	}
 	
 	public String generateNewCodigo() {
-		String ultimoCodigo = solRepo.findUltimoCodigo();
+		String ultimoCodigo = requerimientoRepository.findUltimoCodigo();
 		
 		if(ultimoCodigo == null || ultimoCodigo.isEmpty()) {
 			return "RQ100";
