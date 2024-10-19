@@ -63,7 +63,7 @@
 		<div>
 	<h2>Actualizar Solicitud</h2>
 	<div class="container-fluid" style="border: 1px solid lightgray; padding: 20px; margin-top: 20px; position: relative;">				
-	        <form method="post" th:object="${solicitudDTO}">
+	        <form method="post" th:action="@{/solicitudes/editar/{codSol}(codSol=${solicitudDTO.codSol})}" th:object="${solicitudDTO}">
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Código</label>
 					<div class="col-sm-10">
@@ -74,7 +74,7 @@
 					<div class="row mb-3">	
 					<label class="col-sm-2 col-form-label">Descripción</label>
 						<div class="col-sm-10">
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{desSol}" readonly></textarea>
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{desSol}"></textarea>
 						</div>
 					</div>
 					
