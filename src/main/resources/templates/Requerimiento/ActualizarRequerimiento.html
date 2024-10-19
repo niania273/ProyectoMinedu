@@ -111,7 +111,7 @@
 						</div>
 						<div class=" col-md-3">
 							<label for="inputPreReq">Fecha Límite</label> <input th:field="*{fecLim}" type="date" class="form-control"
-								id="inputFecLim" th:value="${requerimiento.fecLim}" />
+								th:min="${fechaActual}" th:value="${requerimiento.fecLim}" />
 						</div>
 						<div class=" col-md-3">
 							<label for="inputPlaEjeReq">Plazo de Ejecución</label> <input th:field="*{plaEjeReq}" type="text" class="form-control"

@@ -4,16 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.minedu.project.maintenance_management.model.Requerimiento;
+import com.minedu.project.maintenance_management.model.Solicitud;
 import com.minedu.project.maintenance_management.repository.RequerimientoRepository;
+import com.minedu.project.maintenance_management.repository.SolicitudRepository;
+import com.minedu.project.maintenance_management.repository.SuministradorRepository;
 
 import jakarta.transaction.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+
 
 @Service
 public class RequerimientoService {
 	
-	SuministradorService sumService;
+	@Autowired
+	private SuministradorRepository sumRepo;
+	
+	@Autowired
+	private SolicitudRepository solRepo;
 	
 	@Autowired
 	private RequerimientoRepository requerimientoRepository;
@@ -28,11 +39,45 @@ public class RequerimientoService {
 		
 	}
 	
-	public Requerimiento saveRequerimiento(Requerimiento requerimiento) {
-		return requerimientoRepository.save(requerimiento);
+	public String generateNewCodigo() {
+		String ultimoCodigo = solRepo.findUltimoCodigo();
+		
+		if(ultimoCodigo == null || ultimoCodigo.isEmpty()) {
+			return "RQ100";
+		}
+		
+		String ultimoNumero = ultimoCodigo.substring(2);
+		int nuevoNumero = Integer.parseInt(ultimoNumero) + 1;
+		
+		return "RQ" + nuevoNumero;
+	}
+	
+	public Requerimiento saveRequerimiento(Requerimiento newRequerimiento) {
+		try {
+			
+			newRequerimiento.setCodReq(generateNewCodigo());
+			newRequerimiento.setEstReq("Activo");
+			newRequerimiento.setFecCre(LocalDate.now());
+			newRequerimiento.setFecAct(LocalDate.now());
+			Solicitud solAsociada = solRepo.findById(newRequerimiento.getSolicitud().getCodSol()).get();
+			
+			solAsociada.setEstSol("Programada");
+			
+			solRepo.save(solAsociada);
+			
+			return requerimientoRepository.save(newRequerimiento);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			
+			return null;
+		}
+		
 	}
 	
 	public void deleteRequerimiento(String id) {
+		Solicitud solAsociada = solRepo.findById(requerimientoRepository.findById(id).get().getSolicitud().getCodSol()).get();		
+		solAsociada.setEstSol("Pendiente");
 		requerimientoRepository.deleteById(id);
 	}
 	

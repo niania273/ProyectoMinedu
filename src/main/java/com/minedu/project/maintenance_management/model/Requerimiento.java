@@ -1,6 +1,7 @@
 package com.minedu.project.maintenance_management.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.*;
 
@@ -33,16 +34,16 @@ public class Requerimiento {
 	private double preReq;
 	
 	@Column (name = "FEC_LIM", nullable = true)
-	private Date fecLim;
+	private LocalDate fecLim;
 	
 	@Column (name = "EST_REQ", length = 50, nullable = true)
 	private String estReq;
 	
 	@Column (name = "FEC_CRE", nullable = false)
-	private Date fecCre;
+	private LocalDate fecCre;
 	
 	@Column (name = "FEC_ACT", nullable = false)
-	private Date fecAct;
+	private LocalDate fecAct;
 	
 	public Requerimiento() {
 		// TODO Auto-generated constructor stub
@@ -104,11 +105,11 @@ public class Requerimiento {
 		this.preReq = preReq;
 	}
 
-	public Date getFecLim() {
+	public LocalDate getFecLim() {
 		return fecLim;
 	}
 
-	public void setFecLim(Date fecLim) {
+	public void setFecLim(LocalDate fecLim) {
 		this.fecLim = fecLim;
 	}
 
@@ -120,19 +121,19 @@ public class Requerimiento {
 		this.estReq = estReq;
 	}
 
-	public Date getFecCre() {
+	public LocalDate getFecCre() {
 		return fecCre;
 	}
 
-	public void setFecCre(Date fecCre) {
+	public void setFecCre(LocalDate fecCre) {
 		this.fecCre = fecCre;
 	}
 
-	public Date getFecAct() {
+	public LocalDate getFecAct() {
 		return fecAct;
 	}
 
-	public void setFecAct(Date fecAct) {
+	public void setFecAct(LocalDate fecAct) {
 		this.fecAct = fecAct;
 	}
 }

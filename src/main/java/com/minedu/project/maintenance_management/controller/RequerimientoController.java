@@ -2,6 +2,8 @@ package com.minedu.project.maintenance_management.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.minedu.project.maintenance_management.model.Requerimiento;
 import com.minedu.project.maintenance_management.model.Suministrador;
+import com.minedu.project.maintenance_management.model.Solicitud;
 import com.minedu.project.maintenance_management.service.RequerimientoService;
 import com.minedu.project.maintenance_management.service.SolicitudService;
 import com.minedu.project.maintenance_management.service.SuministradorService;
@@ -41,9 +44,36 @@ public class RequerimientoController {
 	@PreAuthorize("hasAuthority('USAU')")
 	@GetMapping("/generar")
 	public String generarRequerimientos(Model model) {
-		model.addAttribute("lstSolicitudes", solService.findAllSolicitudes());
+		
+		List<Solicitud> solicitudesPendientes = solService.findAllSolicitudes().stream()
+		        .filter(solicitud -> "Pendiente".equals(solicitud.getEstSol()))
+		        .collect(Collectors.toList());
+		
+		model.addAttribute("lstSolicitudes", solicitudesPendientes);
 		model.addAttribute("lstSuministradores", sumService.findAllSuministradores());	
+		model.addAttribute("requerimiento", new Requerimiento());
+		
+		LocalDate fechaActual = LocalDate.now();
+		String fechaActualFormateada = fechaActual.format(DateTimeFormatter.ISO_LOCAL_DATE);
+		model.addAttribute("fechaActual", fechaActualFormateada);
+		
 		return "Requerimiento/GenerarRequerimiento";
+	}
+	
+	@PostMapping("/generar")
+	public String generarRequerimientos(Model model, @ModelAttribute Requerimiento newRequerimiento) {
+		try {
+
+			reqService.saveRequerimiento(newRequerimiento); 
+			
+			return "redirect:/requerimientos";
+			
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			
+			return "redirect:/requerimientos/generar";
+		}
+		
 	}
 	
 	@PreAuthorize("hasAuthority('USAU')")
@@ -78,21 +108,23 @@ public class RequerimientoController {
 	    try {
 	    	String codSum = newRequerimiento.getSuministrador().getCodSum();
 	        
-	    	
 	        Suministrador suministrador = sumService.findSuministradorById(codSum);
+	        
 	        newRequerimiento.setSuministrador(suministrador);
 	        newRequerimiento.setCodReq(codRequerimiento);
-	        System.out.println("CONTROLLER");
 	        
 	        reqService.updateRequerimiento(newRequerimiento);
 	        
 	        model.addAttribute("message", "Requerimiento actualizado exitosamente");
 	        
 	        return "redirect:/requerimientos"; 
+	        
 	    } catch (Exception e) {
+	    	
 	    	System.out.println(e.getMessage());
 	    	model.addAttribute("error", "Error al actualizar el requerimiento: " + e.getMessage());
 	        return "redirect:/requerimientos/actualizar/{codRequerimiento}";
+	        
 	    }
 	}
 

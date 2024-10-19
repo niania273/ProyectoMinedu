@@ -10,7 +10,7 @@ public class AppUser {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name = "ID_USU")
+	@Column (name = "COD_USU")
 	private int codUsu;
 	
 	@Column (name = "NOM_USU", length = 100, nullable = false)
