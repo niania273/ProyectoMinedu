@@ -81,4 +81,52 @@ public class ReporteService {
 
 	    return outputStream.toByteArray();
 	}
+	
+	public byte[] exportarRequerimiento(String reportFormat) throws JRException, IOException, SQLException {
+	    JasperReport jasperReport = JasperCompileManager.compileReport(
+	        resourceLoader.getResource("classpath:reports/reporte_requerimientos.jrxml").getInputStream()
+	    );
+	    
+	    Connection connection = jdbcTemplate.getDataSource().getConnection();
+
+	    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, connection);
+
+	    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+	    switch (reportFormat.toLowerCase()) {
+	    	case "doc":
+	            JRDocxExporter docxExporter = new JRDocxExporter();
+	            docxExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+	            docxExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputStream));
+	            docxExporter.exportReport();
+	            break;
+	    	case "pdf":
+	            JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+	            break;
+	        case "excel":
+	            JRXlsxExporter excelExporter = new JRXlsxExporter();
+	            excelExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+	            excelExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputStream));
+	            excelExporter.exportReport();
+	            break;
+	        case "html":
+	            HtmlExporter htmlExporter = new HtmlExporter();
+	            htmlExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+	            htmlExporter.setExporterOutput(new SimpleHtmlExporterOutput(outputStream));
+	            htmlExporter.exportReport();
+	            break;
+	        case "csv":
+	            JRCsvExporter csvExporter = new JRCsvExporter();
+	            csvExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+	            csvExporter.setExporterOutput(new SimpleWriterExporterOutput(outputStream));
+	            csvExporter.exportReport();
+	            break;
+	        default:
+	            throw new IllegalArgumentException("Formato no soportado: " + reportFormat);
+	    }
+
+	    connection.close();
+
+	    return outputStream.toByteArray();
+	}
 }

@@ -1,11 +1,16 @@
 package com.minedu.project.maintenance_management.controller;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.minedu.project.maintenance_management.model.Requerimiento;
 import com.minedu.project.maintenance_management.model.Suministrador;
 import com.minedu.project.maintenance_management.model.Solicitud;
+import com.minedu.project.maintenance_management.service.ReporteService;
 import com.minedu.project.maintenance_management.service.RequerimientoService;
 import com.minedu.project.maintenance_management.service.SolicitudService;
 import com.minedu.project.maintenance_management.service.SuministradorService;
+
+import net.sf.jasperreports.engine.JRException;
 
 @Controller
 @RequestMapping("/requerimientos")
@@ -34,6 +42,9 @@ public class RequerimientoController {
 	
 	@Autowired
 	private SuministradorService sumService;
+	
+	@Autowired
+	private ReporteService reporteService;
 	
 	@GetMapping
 	public String requerimientos(Model model) {
@@ -155,6 +166,21 @@ public class RequerimientoController {
 			System.out.println(e.getMessage());
 		}
 		return "redirect:/requerimientos";
+	}
+	
+	@GetMapping("/exportar/{formato}")
+	public ResponseEntity<byte[]> exportarSolicitud(@PathVariable String formato) throws JRException, IOException, SQLException {
+
+	    byte[] reporte = reporteService.exportarRequerimiento(formato);
+
+	    HttpHeaders headers = new HttpHeaders();
+	    String extension = formato.equals("excel") ? "xlsx" : 
+				           formato.equals("csv") ? "csv" : 
+				           formato.equals("doc") ? "docx" : 
+				           formato;
+	    headers.add("Content-Disposition", "attachment; filename=reporte_requerimientos." + extension);
+
+	    return new ResponseEntity<>(reporte, headers, HttpStatus.OK);
 	}
 	
 }

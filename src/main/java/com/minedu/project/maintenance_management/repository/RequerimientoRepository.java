@@ -7,6 +7,6 @@ import com.minedu.project.maintenance_management.model.Requerimiento;
 
 public interface RequerimientoRepository extends JpaRepository <Requerimiento, String>{
 	void deleteBySolicitud_CodSol(String codSol);
-	@Query("SELECT r.codReq FROM Requerimiento r ORDER BY r.codreq DESC LIMIT 1")
+	@Query("SELECT r.codReq FROM Requerimiento r ORDER BY r.codReq DESC LIMIT 1")
     String findUltimoCodigo();
 }
