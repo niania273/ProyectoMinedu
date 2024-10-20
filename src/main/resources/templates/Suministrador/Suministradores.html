@@ -183,7 +183,7 @@
 				row.classList.remove('active');
 			});
 
-			// Si la fila no estaba activa, agregar la clase 'active' y obtener el código del requerimiento; de lo contrario, eliminarla
+			// Si la fila no estaba activa, agregar la clase 'active' y obtener el código del suministrador; de lo contrario, eliminarla
 			if (!isActive) {
 				tr.classList.add('active');
 				codSuministrador = tr.querySelector('td').textContent;
@@ -200,7 +200,7 @@
 		if (codSuministrador) {
 			window.location.href = `/suministradores/editar?codSuministrador=${encodeURIComponent(codSuministrador)}`;
 		} else {
-			alert("Por favor, seleccione un requerimiento");
+			alert("Por favor, seleccione un suministrador");
 		}
 
 	});
@@ -210,7 +210,7 @@
 			if (codSuministrador) {
 				window.location.href = `/suministradores/detalles/${encodeURIComponent(codSuministrador)}`;
 			} else {
-				alert("Por favor, seleccione un requerimiento");
+				alert("Por favor, seleccione un suministrador");
 			}
 
 		});
@@ -289,7 +289,7 @@
 					const url = window.URL.createObjectURL(blob);
 					const a = document.createElement('a');
 					a.href = url;
-					a.download = `reporte_requerimientos.${formato === 'excel' ? 'xlsx' : formato === 'csv' ? 'csv' : formato === 'doc' ? 'docx' : 'pdf'}`;
+					a.download = `reporte_suministradores.${formato === 'excel' ? 'xlsx' : formato === 'csv' ? 'csv' : formato === 'doc' ? 'docx' : 'pdf'}`;
 					document.body.appendChild(a);
 					a.click();
 					a.remove();
