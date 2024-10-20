@@ -105,9 +105,10 @@ public class RequerimientoController {
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			
+			return "redirect:/requerimientos";
 		}
 		
-		return "redirect:/requerimientos";
 	}
 	
 	@PostMapping("/actualizar/{codRequerimiento}")
