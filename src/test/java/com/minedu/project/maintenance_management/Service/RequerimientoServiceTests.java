@@ -1,4 +1,4 @@
-package com.minedu.project.maintenance_management.Service;
+package com.minedu.project.maintenance_management.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,11 @@ import com.minedu.project.maintenance_management.service.RequerimientoService;
 
 import jakarta.transaction.Transactional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -26,6 +30,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class RequerimientoServiceTests {
+	
+	@Mock
+	private SolicitudRepository solRepo;
+	
+	@Mock
+	private SuministradorRepository sumRepo;
 	
 	@Mock
 	private RequerimientoRepository reqRepository;
@@ -42,8 +52,10 @@ public class RequerimientoServiceTests {
 		requerimiento = new Requerimiento();
 		requerimiento.setCodReq("RQ999");
 		requerimiento.setSolicitud(new Solicitud());
+		requerimiento.getSolicitud().setCodSol("ST101");
 		requerimiento.setSuministrador(new Suministrador());
 		requerimiento.setTitReq("Du isst das Kind");
+		requerimiento.setEstReq("Generado");
 		requerimiento.setDesReq("Einen Apfel");
 		requerimiento.setPlaEjeReq("Nein");
 		requerimiento.setPreReq(30.50);
@@ -53,15 +65,45 @@ public class RequerimientoServiceTests {
 	}
 	
 	@Test
-	void findAllRequerimientos() {
+	void testFindAllRequerimientos() {
 		
 		when(reqRepository.findAll()).thenReturn(Arrays.asList(requerimiento));
 		assertNotNull(reqService.findAllRequerimientos());
 	}
 	
 	@Test
-	void findRequerimientoById() {
+	void testFindRequerimientoById() {
+		when(reqRepository.findById(requerimiento.getCodReq())).thenReturn(Optional.of(requerimiento));
+		assertEquals(requerimiento, reqService.findRequerimientoById(requerimiento.getCodReq()));
+	}
+	
+	@Test
+	void testSaveRequerimiento() {
+		
+		when(solRepo.findById(requerimiento.getSolicitud().getCodSol())).thenReturn(Optional.of(requerimiento.getSolicitud()));
+		
+		when(reqRepository.save(requerimiento)).thenReturn(requerimiento);
+		assertNotNull(reqService.saveRequerimiento(requerimiento));
+	}
+	
+	@Test
+	void testDeleteRequerimiento() {
+		
+		when(reqRepository.findById(requerimiento.getCodReq())).thenReturn(Optional.of(requerimiento));
+		when(solRepo.findById(requerimiento.getSolicitud().getCodSol())).thenReturn(Optional.of(requerimiento.getSolicitud()));		
+		
+		reqService.deleteRequerimiento(requerimiento.getCodReq());
+		verify(reqRepository, times(1)).deleteById(requerimiento.getCodReq());
 		
 	}
 	
+	@Test
+	void testUpdateRequerimiento() {
+		
+		when(reqRepository.findById(requerimiento.getCodReq())).thenReturn(Optional.of(requerimiento));
+		when(reqRepository.save(requerimiento)).thenReturn(requerimiento);
+		
+		assertNotNull(reqService.updateRequerimiento(requerimiento));
+		
+	}
 }
