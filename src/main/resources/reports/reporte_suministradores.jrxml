@@ -1,0 +1,211 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reporte_suministradores" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4cc65b4c-d758-45cc-ab07-9dab18949216">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="ZGJfbWluZWR1LnN1bWluaXN0cmFkb3IgQVMgLDUyLDk1LDY1MGU4YjAwLTY0NDYtNDQ0YS1hZGVi&#xa;LWMyOWE3YTZjZjM5OTs="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapterSuministrador.jrdax"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<dataset name="DatasetSuministradores" uuid="6649df2a-94e3-4b8a-801f-124064677c32">
+		<property name="com.jaspersoft.studio.data.sql.tables" value="ZGJfbWluZWR1LnN1bWluaXN0cmFkb3IgQVMgLDE0MCw2OCwxZTZjMzEyOS04NDRkLTQ0MmYtODJl&#xa;My03YTI1NDhlNjQ2OGI7"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapterSuministrador.jrdax"/>
+		<parameter name="Parameter1" class="java.lang.String"/>
+		<query language="SQL"><![CDATA[SELECT `COD_SUM`,
+	ruc_sum,
+	`NOM_SUM`,
+	tel_sum,
+	`EMA_SUM`
+FROM db_minedu.suministrador]]></query>
+		<field name="COD_SUM" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="COD_SUM"/>
+			<property name="com.jaspersoft.studio.field.label" value="COD_SUM"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+		</field>
+		<field name="ruc_sum" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="ruc_sum"/>
+			<property name="com.jaspersoft.studio.field.label" value="ruc_sum"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+		</field>
+		<field name="NOM_SUM" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="NOM_SUM"/>
+			<property name="com.jaspersoft.studio.field.label" value="NOM_SUM"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+		</field>
+		<field name="tel_sum" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="tel_sum"/>
+			<property name="com.jaspersoft.studio.field.label" value="tel_sum"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+		</field>
+		<field name="EMA_SUM" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="EMA_SUM"/>
+			<property name="com.jaspersoft.studio.field.label" value="EMA_SUM"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+		</field>
+		<group name="COD_SUM">
+			<expression><![CDATA[$F{COD_SUM}]]></expression>
+		</group>
+	</dataset>
+	<query language="SQL"><![CDATA[SELECT ruc_sum,
+	`COD_SUM`,
+	`NOM_SUM`,
+	tel_sum,
+	`EMA_SUM`
+FROM db_minedu.suministrador]]></query>
+	<field name="ruc_sum" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ruc_sum"/>
+		<property name="com.jaspersoft.studio.field.label" value="ruc_sum"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+	</field>
+	<field name="COD_SUM" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="COD_SUM"/>
+		<property name="com.jaspersoft.studio.field.label" value="COD_SUM"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+	</field>
+	<field name="NOM_SUM" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOM_SUM"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOM_SUM"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+	</field>
+	<field name="tel_sum" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tel_sum"/>
+		<property name="com.jaspersoft.studio.field.label" value="tel_sum"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+	</field>
+	<field name="EMA_SUM" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EMA_SUM"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMA_SUM"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="suministrador"/>
+	</field>
+	<sortField name="COD_SUM" order="Descending"/>
+	<group name="COD_SUM">
+		<expression><![CDATA[$F{COD_SUM}]]></expression>
+	</group>
+	<title height="200" splitType="Stretch">
+		<element kind="frame" uuid="6c698307-78a0-424e-b4cd-071f054fda6c" x="-20" y="-20" width="595" height="180">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<element kind="image" uuid="2fa3a61f-3845-4fdf-82f8-cbe70746d944" x="20" y="10" width="200" height="60">
+				<expression><![CDATA["https://www.petroperu.com.pe/Storage/modsnw/image/397-o0Xd9Jm0Pp6Fq7Q.jpg"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			</element>
+			<element kind="staticText" uuid="049ae339-2ccc-4b68-8b2d-45b4ca0c4b11" x="105" y="30" width="470" height="20" forecolor="#030303" fontSize="12.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Oficina de Tecnologías de Información y Comunicaciones (OTIC)]]></text>
+			</element>
+			<element kind="staticText" uuid="55a5d099-20d3-43a7-9d72-05f64528127d" x="50" y="70" width="480" height="50" forecolor="#050505" fontSize="16.0" bold="true" hTextAlign="Center">
+				<text><![CDATA[Informe de Suministradores Registrados]]></text>
+			</element>
+			<element kind="staticText" uuid="82d29969-5302-491d-9656-aafd7bbba5b2" x="19" y="120" width="555" height="70" hTextAlign="Justified" vTextAlign="Middle">
+				<text><![CDATA[Suministradores registrados:]]></text>
+			</element>
+			<element kind="component" uuid="04f23309-6b61-4642-acfc-8486d3d964c2" x="20" y="200" width="555" height="210">
+				<component kind="table">
+					<datasetRun uuid="ee3928d8-610e-4af1-a372-73275535246c" subDataset="DatasetSuministradores">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<column kind="single" uuid="cc3851f2-0835-41b5-a880-f07b04b7ad85" width="80">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="staticText" uuid="4efaf577-bbc3-4854-8903-5cd0a6c6cea5" x="0" y="0" width="80" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[CODIGO]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="777c5019-5c03-45e3-ac3e-68a21f5cabaf" x="0" y="0" width="80" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{COD_SUM}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+					</column>
+					<column kind="single" uuid="1df9e68e-fe36-4c38-b61e-40f74d4b1646" width="120">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="staticText" uuid="0c023a5f-7142-4b9f-8658-317efac2bef2" x="0" y="0" width="120" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[RUC ]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="bd281474-41ba-4fba-8036-d6898cda9271" x="0" y="0" width="120" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{ruc_sum}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+					</column>
+					<column kind="single" uuid="184b2c58-14cf-4580-b9a0-f1abfd01239b" width="120">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="staticText" uuid="15a84353-621d-40d1-bff2-508504851c60" x="0" y="0" width="120" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[NOMBRE]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="eafd8ba9-fd81-4124-9d26-fa58fa9ccd80" x="0" y="0" width="120" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{NOM_SUM}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					</column>
+					<column kind="single" uuid="bdbd8210-0731-45bf-bbef-5a859b4c9989" width="100">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="staticText" uuid="8bfcac39-1367-4c70-a2b7-64f3a0510f64" x="0" y="0" width="100" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[TELÉFONO]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="cc53c8ab-0317-4fce-b720-42087e7f78e6" x="0" y="0" width="100" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{tel_sum}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					</column>
+					<column kind="single" uuid="642a3b46-fff6-4995-b03b-4e96ed22bfcc" width="135">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="staticText" uuid="84d8cb36-88ee-43ad-84bb-e00b3910bdbc" x="0" y="0" width="135" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[EMAIL]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="274751d8-6086-4837-9ffd-d2054141f43b" x="0" y="0" width="135" height="30" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{EMA_SUM}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+					</column>
+				</component>
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+				<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+				<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+				<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>
