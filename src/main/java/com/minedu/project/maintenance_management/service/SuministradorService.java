@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 import com.minedu.project.maintenance_management.repository.SuministradorRepository;
+
+import jakarta.transaction.Transactional;
+
 import com.minedu.project.maintenance_management.model.Suministrador;
 
 @Service
@@ -39,19 +42,18 @@ public class SuministradorService {
 			}
 			
 	}
+	/*
+	@Transactional	
+	public Suministrador updateSuministrador(Suministrador suministrador) {
+		
+		Optional<Suministrador> suministradorEncontrado = suministradorRepository.findById(suministrador.getCodSum());
+		
+		if (!suministradorEncontrado.isPresent()) {
+            throw new RuntimeException("Suministrador no encontrado con el código: " + suministrador.getCodSum());
+        }
 	
-	public String generateNewCodigo() {
-		String ultimoCodigo = suministradorRepository.findUltimoCodigo();
-		
-		if(ultimoCodigo == null || ultimoCodigo.isEmpty()) {
-			return "SU100";
-		}
-		
-		String ultimoNumero = ultimoCodigo.substring(2);
-		int nuevoNumero = Integer.parseInt(ultimoNumero) + 1;
-		
-		return "SU" + nuevoNumero;
-	}
+	}*/
+	
 	
 	
 	/* Eliminar Suministrador */
@@ -72,7 +74,18 @@ public class SuministradorService {
 		 return suministradorRepository.existsById(codSuministrador);
 	}
 
-
+	public String generateNewCodigo() {
+		String ultimoCodigo = suministradorRepository.findUltimoCodigo();
+		
+		if(ultimoCodigo == null || ultimoCodigo.isEmpty()) {
+			return "SU100";
+		}
+		
+		String ultimoNumero = ultimoCodigo.substring(2);
+		int nuevoNumero = Integer.parseInt(ultimoNumero) + 1;
+		
+		return "SU" + nuevoNumero;
+	}
 	
 
 }
