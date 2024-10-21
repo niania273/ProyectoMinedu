@@ -42,21 +42,27 @@ public class SuministradorService {
 			}
 			
 	}
-	/*
+	
 	@Transactional	
 	public Suministrador updateSuministrador(Suministrador suministrador) {
 		
-		Optional<Suministrador> suministradorEncontrado = suministradorRepository.findById(suministrador.getCodSum());
+		Optional<Suministrador> suministradorOpt = suministradorRepository.findById(suministrador.getCodSum());
 		
-		if (!suministradorEncontrado.isPresent()) {
+		if (!suministradorOpt.isPresent()) {
             throw new RuntimeException("Suministrador no encontrado con el código: " + suministrador.getCodSum());
         }
+		
+		Suministrador suministradorEncontrado = suministradorOpt.get();
+		
+		suministradorEncontrado.setEmaSum(suministrador.getEmaSum());
+		suministradorEncontrado.setNomSum(suministrador.getNomSum());
+		suministradorEncontrado.setRucSum(suministrador.getRucSum());
+		suministradorEncontrado.setTelSum(suministrador.getTelSum());
+		
+		return suministradorRepository.save(suministradorEncontrado);
+	}
 	
-	}*/
 	
-	
-	
-	/* Eliminar Suministrador */
 	public void deleteSuministrador(String id) {
 	    System.out.println("Intentando eliminar el suministrador con ID: " + id);
 	    
