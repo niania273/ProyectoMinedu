@@ -1,6 +1,5 @@
 package com.minedu.project.maintenance_management.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;

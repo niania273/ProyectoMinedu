@@ -57,50 +57,47 @@
 		</nav>
 		<br>
 
-		<div style="padding: 30px;">
+		<div style="padding-left: 30px; padding-top: 10px;">
 				<nav style="margin-bottom: 10px;" aria-label="breadcrumb">
-					<ol class="breadcrumb">
+					<ol class="breadcrumb" style="color: gray; font-size: 15px; font-weight: 600;">
 						<li class="breadcrumb-item"><a th:href="@{/inicio}">INICIO</a></li>
-						<li class="breadcrumb-item"><a th:href="@{/suministradores}">SUMINISTRADOR</a></li>
-						<li class="breadcrumb-item active" aria-current="page">DETALLES</li>
+						<li class="breadcrumb-item"><a th:href="@{/suministradores}">SUMINISTRADORES</a></li>
+						<li class="breadcrumb-item active" aria-current="page">VISUALIZACIÓN</li>
 					</ol>
 				</nav>
-		</div>
 				
-		<div class="container mt-4">
-			
-		<h1>Detalles de Suministrador</h1>
-			<div style="width: 1000px;  margin: 20px auto 20px auto; padding: 10px; border: 1px solid gray; border-radius: 10px">
-				<form>
-					<div class="row mb-3">
-						<div class="mt-2 row-md-6">
-							<label for="nomSum">Nombre</label> <input readonly type="text" class="form-control"
-								id="nomSum" th:value="${suministrador.nomSum}" />
-						</div>
-						
-						<div class="mt-3 row-md-3">
-							<label for="RUC">RUC </label> <input readonly type="number"
-								class="form-control" id="RUC" th:value="${suministrador.rucSum}" />
-						</div>
-						
-						<div class="mt-3 row-md-3">
-							<label for="inputFecAct">Teléfono</label> <input readonly type="number"
-								class="form-control background" th:value="${suministrador.telSum}" />
-						</div>
-						
-						<div class="mt-3 row-md-3">
-							<label for="emaSum">E-mail</label> <input readonly type="text" class="form-control"
-								id="email Sumi" th:value="${suministrador.emaSum}" />
-						</div>
-					</form>
+		<h2>Detalles de Suministrador</h2>
+		<div style="margin-top: 20px; margin-right: 30px; padding: 20px; border: 1px solid lightgray;">
+				
+				<div class="row mb-3">
+					<div class="col-md-6">
+							                <label for="RUC">RUC</label>
+							                <input readonly type="number" class="form-control" id="RUC" th:value="${suministrador.rucSum}" />
+					</div>
+					<div class="col-md-6">
+							                <label for="inputTelSum">Teléfono</label>
+							                <input readonly type="number" class="form-control" id="inputTelSum" th:value="${suministrador.telSum}" />
+					</div>
 				</div>
 				<div class="row mb-3">
-						<div class="col-md-3 pt-4">
-							<a th:href="@{/suministradores}" class="btn btn-secondary text-white"
-								style="margin-right: 5px;">Volver</a>
-						</div>
-					</div>
-			</div>		
-												
+						            <div class="col-md-12">
+						                <label for="nomSum">Nombre</label>
+						                <input readonly type="text" class="form-control" id="nomSum" th:value="${suministrador.nomSum}" />
+						            </div>
+				</div>
+		        <div class="row mb-3">
+		            <div class="col-md-12">
+		                <label for="emailSumi">E-mail</label>
+		                <input readonly type="text" class="form-control" id="emailSumi" th:value="${suministrador.emaSum}" />
+		            </div>
+		        </div>
+
+		        <div class="row mb-3">
+		            <div class="col-md-3 pt-4">
+		                <a th:href="@{/suministradores}" class="btn btn-secondary text-white" style="margin-right: 5px;">Volver</a>
+		            </div>
+		        </div>
+		</div>
+		</div>									
 </body>
 </html>

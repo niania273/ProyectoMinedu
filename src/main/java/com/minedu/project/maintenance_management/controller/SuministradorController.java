@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,12 +41,9 @@ public class SuministradorController {
 	@GetMapping("/generar")
 	public String showRegistrarSuministrador(Model model) {
 		model.addAttribute("suministrador", new Suministrador());
-	    return "Suministrador/registrarsuministrador"; // Nombre de la vista que quieres mostrar
+	    return "Suministrador/registrarsuministrador";
 	}
 
-
-	
-	@PreAuthorize("hasAuthority('LOG')")
 	@PostMapping("/guardar")
 	public String registrarSuministrador(Model model, @ModelAttribute Suministrador newSuministrador) {
 	    try {
@@ -62,7 +58,6 @@ public class SuministradorController {
 	        return "Suministrador/RegistrarSuministrador"; 
 	    }
 	}
-	
 	
 	@GetMapping("/detalles/{codSuministrador}")
 	public String detallesSuministrador(@PathVariable("codSuministrador") String codSuministrador, Model model) {
@@ -84,29 +79,26 @@ public class SuministradorController {
 	@GetMapping("/editar")
 	public String showEditarSuministrador(@RequestParam("codSuministrador") String ID, Model model) {
 	    Suministrador suministrador = service.findSuministradorById(ID);
-	    model.addAttribute("suministrador", suministrador); // Asegúrate de pasar el objeto
-	    return "Suministrador/EditarSuministrador"; // Carga la vista de edición
+	    model.addAttribute("suministrador", suministrador);
+	    return "Suministrador/EditarSuministrador";
 	}
 
 	
-	@PostMapping("/actualizar")
-	public String actualizarSuministrador(@ModelAttribute("suministrador") Suministrador suministrador, Model model) {
+	@PostMapping("/editar/{codSuministrador}")
+	public String actualizarSuministrador(@PathVariable("codSuministrador") String codSuministrador, @ModelAttribute("suministrador") Suministrador suministrador, Model model) {
 	    try {
-	        service.saveSuministrador(suministrador);
+	    	service.updateSuministrador(suministrador);
 	        model.addAttribute("mensaje", "Datos actualizados correctamente");
-	        return "redirect:/suministradores"; // Redirigir a la lista de suministradores
+	        return "redirect:/suministradores";
 	    } catch (NoSuchElementException e) {
 	        model.addAttribute("mensaje", "Error: No se encontró el suministrador para actualizar.");
-	        e.printStackTrace(); // Imprimir el error en la consola del servidor
+	        e.printStackTrace();
 	    } catch (Exception e) {
 	        model.addAttribute("mensaje", "Error al actualizar los datos: " + e.getMessage());
-	        e.printStackTrace(); // Imprimir el error en la consola del servidor
+	        e.printStackTrace();
 	    }
-	    return "Suministrador/EditarSuministrador"; // Regresar a la página de edición si hay un error
-	}
-
-
-	
+	    return "Suministrador/EditarSuministrador";
+	}	
 	
 	@PreAuthorize("hasAuthority('LOG')")
 	@DeleteMapping("/eliminar")

@@ -140,10 +140,9 @@ public class RequerimientoController {
 	    }
 	}
 
-	
 	@GetMapping("/detalles/{codRequerimiento}")
 	public String detallesRequerimientos(@PathVariable("codRequerimiento") String codRequerimiento, Model model) {
-	    
+	    /*Original
 		try	{
 			
 			Requerimiento requerimiento = reqService.findRequerimientoById(codRequerimiento);
@@ -154,7 +153,17 @@ public class RequerimientoController {
 			System.out.println(e.getMessage());
 		}
 	    
-		return "redirect:/requerimientos";
+		return "redirect:/requerimientos";*/
+		try	{
+			
+			Requerimiento requerimiento = reqService.findRequerimientoById(codRequerimiento);
+			model.addAttribute("requerimiento", requerimiento);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());	    
+			return "redirect:/requerimientos";
+		}
+		return "Requerimiento/DetallesRequerimiento";
 	}
 	
 	@PreAuthorize("hasAuthority('USAU')")

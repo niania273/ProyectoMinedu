@@ -72,10 +72,10 @@
 			</div>
 		</div>
 	</nav><br>
-	<div style="padding: 30px;">
+	<div style="padding: 30px; padding-top: 10px;">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb" style="color: gray; font-size: 15px; font-weight: 600;">
-				<li class="breadcrumb-item"><a th:href="@{/}">INICIO</a></li>
+				<li class="breadcrumb-item"><a th:href="@{/inicio}">INICIO</a></li>
 				<li class="breadcrumb-item active" aria-current="page">SUMINISTRADORES</li>
 			</ol>
 		</nav>
@@ -124,7 +124,7 @@
 								<strong>¡Éxito!</strong> Su reporte ha sido generado.
 								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 							</div>
-				<a class="btn btn-danger w-100 mb-3" id="deleteSumButton"><i class="bi bi-trash3" sec:authorize="hasAuthority('LOG')"></i>Eliminar</a>
+				<a class="btn btn-danger w-100 mb-3" id="deleteSumButton" sec:authorize="hasAuthority('LOG')"><i class="bi bi-trash3"></i>Eliminar</a>
 			</div>
 
 			<div style="width: 80%; float: right;">
@@ -194,7 +194,17 @@
 
 		}
 	});
+	
+	$detailsSumButton.addEventListener('click', () => {
 
+				if (codSuministrador) {
+					window.location.href = `/suministradores/detalles/${encodeURIComponent(codSuministrador)}`;
+				} else {
+					alert("Por favor, seleccione un suministrador");
+				}
+
+			});
+	
 	$updateSumButton.addEventListener('click', () => {
 
 		if (codSuministrador) {
@@ -204,16 +214,6 @@
 		}
 
 	});
-
-	$detailsSumButton.addEventListener('click', () => {
-
-			if (codSuministrador) {
-				window.location.href = `/suministradores/detalles/${encodeURIComponent(codSuministrador)}`;
-			} else {
-				alert("Por favor, seleccione un suministrador");
-			}
-
-		});
 	
 	$deleteSumButton.addEventListener('click', () => {
 	    if (codSuministrador) {
