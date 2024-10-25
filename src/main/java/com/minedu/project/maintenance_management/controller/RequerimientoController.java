@@ -89,7 +89,7 @@ public class RequerimientoController {
 	
 	@PreAuthorize("hasAuthority('USAU')")
 	@GetMapping("/actualizar/{codRequerimiento}")
-	public String actualizarRequerimientos(@PathVariable("codRequerimiento") String codRequerimiento, Model model) {
+	public String actualizarRequerimientos(@PathVariable String codRequerimiento, Model model) {
 	    
 		try	{
 			Requerimiento requerimiento = reqService.findRequerimientoById(codRequerimiento);
@@ -113,7 +113,7 @@ public class RequerimientoController {
 	
 	@PostMapping("/actualizar/{codRequerimiento}")
 	public String actualizarRequerimiento(
-			@PathVariable("codRequerimiento") String codRequerimiento,
+			@PathVariable String codRequerimiento,
 			@ModelAttribute Requerimiento newRequerimiento, 
 			Model model) {
 		
@@ -141,19 +141,7 @@ public class RequerimientoController {
 	}
 
 	@GetMapping("/detalles/{codRequerimiento}")
-	public String detallesRequerimientos(@PathVariable("codRequerimiento") String codRequerimiento, Model model) {
-	    /*Original
-		try	{
-			
-			Requerimiento requerimiento = reqService.findRequerimientoById(codRequerimiento);
-			model.addAttribute("requerimiento", requerimiento);
-			return "Requerimiento/DetallesRequerimiento";
-		}
-		catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	    
-		return "redirect:/requerimientos";*/
+	public String detallesRequerimientos(@PathVariable String codRequerimiento, Model model) {
 		try	{
 			
 			Requerimiento requerimiento = reqService.findRequerimientoById(codRequerimiento);
@@ -168,7 +156,7 @@ public class RequerimientoController {
 	
 	@PreAuthorize("hasAuthority('USAU')")
 	@GetMapping("/eliminar/{codRequerimiento}")
-	public String eliminarRequerimiento(@PathVariable("codRequerimiento") String codRequerimiento, Model model) {
+	public String eliminarRequerimiento(@PathVariable String codRequerimiento, Model model) {
 		try	{
 			reqService.deleteRequerimiento(codRequerimiento);
 		}

@@ -60,7 +60,7 @@ public class SuministradorController {
 	}
 	
 	@GetMapping("/detalles/{codSuministrador}")
-	public String detallesSuministrador(@PathVariable("codSuministrador") String codSuministrador, Model model) {
+	public String detallesSuministrador(@PathVariable String codSuministrador, Model model) {
 		
 		try {
 			System.out.println(codSuministrador);
@@ -85,7 +85,7 @@ public class SuministradorController {
 
 	
 	@PostMapping("/editar/{codSuministrador}")
-	public String actualizarSuministrador(@PathVariable("codSuministrador") String codSuministrador, @ModelAttribute("suministrador") Suministrador suministrador, Model model) {
+	public String actualizarSuministrador(@PathVariable String codSuministrador, @ModelAttribute Suministrador suministrador, Model model) {
 	    try {
 	    	service.updateSuministrador(suministrador);
 	        model.addAttribute("mensaje", "Datos actualizados correctamente");

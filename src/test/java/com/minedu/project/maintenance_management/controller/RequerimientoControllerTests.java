@@ -19,38 +19,37 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class RequerimientoControllerTests {
 	
 	@Autowired
-	private MockMvc mockMvc;
-	
-	//SECCION: GET
-	@WithMockUser(username = "santiagodsrussian@gmail.com", roles = "USAU")
-	@Test
-	void shallReturn200WhenGetRequerimientos() throws Exception {
-	    mockMvc.perform(MockMvcRequestBuilders.get("/requerimientos")
-	            .contentType(MediaType.TEXT_HTML))  
-	            .andExpect(status().isOk())          
-	            .andExpect(view().name("Requerimiento/Requerimientos")) 
-	            .andExpect(MockMvcResultMatchers
-	                        .content()
-	                        .contentTypeCompatibleWith(MediaType.TEXT_HTML));
-	}
-	
-	@WithMockUser(username = "santiagodsrussian@gmail.com", roles = "USAU")
-	@Test
-	void shallReturn302WhenGetRequerimientoByIdNotFound() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/requerimientos/detalles/RQ999"))
-				.andExpect(status().isFound());
-	}
+    private MockMvc mockMvc;
 
-	//SECCION: POST
-	
-	@WithMockUser(username = "santiagodsrussian@gmail.com", roles = "USAU")
-	@Test
-	void shallReturn403WhenUserAccessDenied() throws Exception {
-		
-		mockMvc.perform(MockMvcRequestBuilders.post("/requerimientos/actualizar/RQ101")
-				.contentType(MediaType.TEXT_HTML))
-				.andExpect(status().isForbidden());
-		
-	}
+    // SECTION: GET
+    
+    @WithMockUser(roles = "USAU") // Use role instead of username
+    @Test
+    void shallReturn200WhenGetRequerimientos() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/requerimientos")
+                .contentType(MediaType.TEXT_HTML))  
+                .andExpect(status().isOk())          
+                .andExpect(view().name("Requerimiento/Requerimientos")) 
+                .andExpect(MockMvcResultMatchers
+                            .content()
+                            .contentTypeCompatibleWith(MediaType.TEXT_HTML));
+    }
+
+    @WithMockUser(roles = "USAU")
+    @Test
+    void shallReturn302WhenGetRequerimientoByIdNotFound() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/requerimientos/detalles/RQ999"))
+                .andExpect(status().isFound());
+    }
+
+    // SECTION: POST
+
+    @WithMockUser(roles = "USAU")
+    @Test
+    void shallReturn403WhenUserAccessDenied() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/requerimientos/actualizar/RQ101")
+                .contentType(MediaType.TEXT_HTML))
+                .andExpect(status().isForbidden());
+    }
 
 }
