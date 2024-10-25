@@ -1,4 +1,4 @@
-package com.minedu.project.maintenance_management.service;
+package com.minedu.project.maintenance_management.Service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -26,6 +26,8 @@ import com.minedu.project.maintenance_management.repository.RequerimientoReposit
 import com.minedu.project.maintenance_management.repository.SolicitanteRepository;
 import com.minedu.project.maintenance_management.repository.SolicitudEquipoRepository;
 import com.minedu.project.maintenance_management.repository.SolicitudRepository;
+import com.minedu.project.maintenance_management.service.SolicitanteService;
+import com.minedu.project.maintenance_management.service.SolicitudService;
 
 @ExtendWith(MockitoExtension.class)
 public class SolicitudServiceTest {

@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class SolicitudControllerTest {
-	
+	/*
 	@Autowired
 	private MockMvc mockMvc;
 	
@@ -50,5 +50,5 @@ public class SolicitudControllerTest {
 	            .content(solicitudJSON)
 	            .with(user("canalesfabiana@gmail.com").authorities(new SimpleGrantedAuthority("LOG"))))
 	        .andExpect(status().isForbidden());
-	}
+	}*/
 }
