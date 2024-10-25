@@ -21,6 +21,7 @@ public class SecurityConfig {
 			    .requestMatchers("/custom-login").permitAll()
 			    .requestMatchers("/logout").permitAll()
 			    .requestMatchers("/solicitudes/editar").hasAuthority("USAU")
+			    .requestMatchers("/solicitudes/eliminar").hasAuthority("USAU")
 			    .requestMatchers("/suministradores/registrar").hasAuthority("LOG")
 			    .requestMatchers("/suministradores/editar").hasAuthority("LOG")
 			    .requestMatchers("/suministradores/eliminar").hasAuthority("LOG")
