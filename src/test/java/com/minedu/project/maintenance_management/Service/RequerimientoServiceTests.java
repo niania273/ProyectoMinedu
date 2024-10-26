@@ -54,7 +54,7 @@ public class RequerimientoServiceTests {
 		requerimiento.setSolicitud(new Solicitud());
 		requerimiento.getSolicitud().setCodSol("ST101");
 		requerimiento.setSuministrador(new Suministrador());
-		requerimiento.setTitReq("Du isst das Kind");
+		requerimiento.setTitReq("Du isst einen Brot");
 		requerimiento.setEstReq("Generado");
 		requerimiento.setDesReq("Einen Apfel");
 		requerimiento.setPlaEjeReq("Nein");
