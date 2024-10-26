@@ -43,7 +43,7 @@ public class SolicitudController {
 	}
 	
 	@GetMapping("/ver/{codSol}")
-	public String getSolicitudById(@PathVariable("codSol") String codSol, Model model) {
+	public String getSolicitudById(@PathVariable String codSol, Model model) {
 		
 		try {
 			SolicitudDTO solicitudDTO = solicitudService.findSolicitudDTOById(codSol);
@@ -63,7 +63,7 @@ public class SolicitudController {
 	
 	@PreAuthorize("hasAuthority('USAU')")
 	@GetMapping("/editar/{codSol}")
-	public String updateSolicitud(@PathVariable("codSol") String codSol, Model model) {
+	public String updateSolicitud(@PathVariable String codSol, Model model) {
 		
 		try {
 			SolicitudDTO solicitudDTO = solicitudService.findSolicitudDTOById(codSol);
@@ -82,7 +82,7 @@ public class SolicitudController {
 	}
 
 	@PostMapping("/editar/{codSol}")
-	public String updateSolicitud(@PathVariable("codSol") String codSol, 
+	public String updateSolicitud(@PathVariable String codSol, 
 			Model model, 
 			@ModelAttribute SolicitudDTO solicitudDTO) {
 		
@@ -96,7 +96,7 @@ public class SolicitudController {
 	}
 	
 	@GetMapping("/eliminar/{codSol}")
-	public String deleteSolicitud(@PathVariable("codSol") String codSol) {
+	public String deleteSolicitud(@PathVariable String codSol) {
 		try {
 			solicitudService.deleteSolicitud(codSol);
 			

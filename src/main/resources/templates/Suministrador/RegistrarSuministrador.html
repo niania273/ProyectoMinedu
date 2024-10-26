@@ -50,37 +50,51 @@
 	    	</div>
 		  </div>
 	</nav><br>
-	<div style="padding: 30px">
+	<div style="padding-left: 30px; padding-top: 10px;">
 		<div>
 			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#">INICIO</a></li>
-					<li class="breadcrumb-item" aria-current="page">SUMINISTRADORES</li>
+				<ol class="breadcrumb" style="color: gray; font-size: 15px; font-weight: 600;">
+					<li class="breadcrumb-item"><a th:href="@{/inicio}">INICIO</a></li>
+												<li class="breadcrumb-item"><a th:href="@{/suministradores}">SUMINISTRADORES</a></li>
 					<li class="breadcrumb-item active" aria-current="page">REGISTRAR SUMINISTRADOR</li>
 				</ol>
 			</nav>
 		</div>
-		<div class="container mt-4">
     <h2>Registrar Suministrador</h2>
-    <form th:action="@{/suministradores}" method="post">
-        <div class="mb-3">
-            <label for="ruc" class="form-label">RUC del Suministrador</label>
-            <input type="text" class="form-control" id="ruc" name="rucSum" required>
-        </div>
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre del Suministrador</label>
-            <input type="text" class="form-control" id="nombre" name="nomSum" required>
-        </div>
-        <div class="mb-3">
-            <label for="telefono" class="form-label">Teléfono</label>
-            <input type="tel" class="form-control" id="telefono" name="telSum" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="email" name="emaSum" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Registrar</button>
-    </form>
+    <div  style="margin-top: 20px; margin-right: 30px; padding: 20px; border: 1px solid lightgray;">
+    <form th:action="@{/suministradores/guardar}" method="post" th:object="${suministrador}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    
+    <div class="row mb-3">
+    
+    <div class="col-md-6">
+    	<label for="RUC">RUC:</label>
+    	<input class="form-control" type="text" th:field="*{rucSum}" id="RUC" placeholder="RUC" requierd /> 
+    </div>
+    <div class="col-md-6">
+        <label for="telefono">Teléfono:</label>
+        <input class="form-control" type="text" th:field="*{telSum}" id="telefono" placeholder="Teléfono" required />
+    </div>
+	</div>
+	<div class="row mb-3">
+	<div class="col-md-12">
+	        <label for="nombre">Nombre:</label>
+	        <input class="form-control" type="text" th:field="*{nomSum}" id="nombre" placeholder="Nombre" required />
+	    </div>
+	</div>
+	<div class="row md-3">
+    <div class="col-md-12">
+        <label for="email">Email:</label>
+        <input class="form-control" type="email" th:field="*{emaSum}" id="email" placeholder="Email" required />
+    </div>
+	</div>
+	<div style="margin-top: 20px;">
+    <button class="btn btn-primary" type="submit">Registrar</button>
+	</div>
+	</form>
+</div>
+
+
 </div>
 		
 	

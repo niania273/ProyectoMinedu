@@ -11,9 +11,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
-	
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
 				.authorizeHttpRequests(auth -> auth
 			    .requestMatchers("/").permitAll()
@@ -21,6 +21,7 @@ public class SecurityConfig {
 			    .requestMatchers("/custom-login").permitAll()
 			    .requestMatchers("/logout").permitAll()
 			    .requestMatchers("/solicitudes/editar").hasAuthority("USAU")
+			    .requestMatchers("/solicitudes/eliminar").hasAuthority("USAU")
 			    .requestMatchers("/suministradores/registrar").hasAuthority("LOG")
 			    .requestMatchers("/suministradores/editar").hasAuthority("LOG")
 			    .requestMatchers("/suministradores/eliminar").hasAuthority("LOG")
@@ -39,9 +40,9 @@ public class SecurityConfig {
 				)
 				.build();
 	}
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 }

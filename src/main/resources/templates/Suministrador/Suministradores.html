@@ -3,10 +3,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" rel="stylesheet" type="text/css" />
 	<title>OTIC | Suministradores </title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link rel="icon" type="image/png" href="https://www.ugellaconvencion.gob.pe/lc/imagenes/logo-otic.png">
 </head>
 <style>
@@ -22,8 +23,6 @@
 		border-radius: 2px;
 		outline: 2px solid #09f;
 		opacity: 1;
-		position: relative;
-		z-index: 9999;
 	}
 </style>
 
@@ -73,10 +72,10 @@
 			</div>
 		</div>
 	</nav><br>
-	<div style="padding: 30px;">
+	<div style="padding: 30px; padding-top: 10px;">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb" style="color: gray; font-size: 15px; font-weight: 600;">
-				<li class="breadcrumb-item"><a th:href="@{/}">INICIO</a></li>
+				<li class="breadcrumb-item"><a th:href="@{/inicio}">INICIO</a></li>
 				<li class="breadcrumb-item active" aria-current="page">SUMINISTRADORES</li>
 			</ol>
 		</nav>
@@ -84,20 +83,48 @@
 			<h1 style="position: absolute">Suministradores</h1>
 
 			<div style="float: left; width: 15%; position:relative; top: 65px">
-				<a th:href="@{/suministradores/registrar}" class="btn btn-secondary w-100 mb-3" sec:authorize="hasAuthority('LOG')"><i
-						class="bi bi-plus-square"></i>Generar</a>
-
+				<input type="hidden" id="csrfToken" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				
+				<a th:href="@{/suministradores/generar}" class="btn btn-secondary w-100 mb-3" sec:authorize="hasAuthority('LOG')">
+    					<i class="bi bi-plus-square"></i>Generar
+				</a>
+				
 				<a class="btn btn-primary w-100 mb-3" id="updateSumButton" sec:authorize="hasAuthority('LOG')"><i
 						class="bi bi-pencil-square"></i>Actualizar</a>
 
 				<a class="btn btn-success w-100 mb-3" id="detailsSumButton"><i class="bi bi-card-list"></i>Detalles</a>
-				<a class="btn btn-warning w-100 mb-3" id="exportSolButton">
-							<i class="bi bi-download"></i>
-							Exportar
-			    </a>
-				<a class="btn btn-danger w-100 mb-3" id="deleteSumButton" sec:authorize="hasAuthority('LOG')">
-					<i class="bi bi-trash3"></i>
-				Eliminar</a>
+				<a id="exportSumButton" class="btn btn-warning w-100 mb-3 dropdown-toggle" href="#" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-download"></i>
+								Exportar
+							</a>
+							<ul class="dropdown-menu w-100">
+								<li>
+									<a class="dropdown-item" href="#" onclick="exportar('doc')">
+										<i class="bi bi-file-earmark-word"></i>
+										Word
+									</a>
+								</li>
+								<li><a class="dropdown-item" href="#" onclick="exportar('pdf')">
+										<i class="bi bi-file-earmark-pdf"></i>
+										PDF</a></li>
+								<li><a class="dropdown-item" href="#" onclick="exportar('excel')">
+										<i class="bi bi-file-earmark-excel"></i>
+										Excel</a></li>
+								<li><a class="dropdown-item" href="#" onclick="exportar('csv')">
+										<i class="bi bi-filetype-csv"></i>
+										CSV</a></li>
+								<li><a class="dropdown-item" href="#" onclick="exportar('html')">
+										<i class="bi bi-filetype-html"></i>
+										HTML</a></li>
+							</ul>
+
+							<div class="alert alert-warning alert-dismissible fade show" role="alert" id="mensaje"
+								style="display: none;">
+								<strong>¡Éxito!</strong> Su reporte ha sido generado.
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+				<a class="btn btn-danger w-100 mb-3" id="deleteSumButton" sec:authorize="hasAuthority('LOG')"><i class="bi bi-trash3"></i>Eliminar</a>
 			</div>
 
 			<div style="width: 80%; float: right;">
@@ -125,6 +152,7 @@
 		</div>
 	</div>
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
@@ -155,7 +183,7 @@
 				row.classList.remove('active');
 			});
 
-			// Si la fila no estaba activa, agregar la clase 'active' y obtener el código del requerimiento; de lo contrario, eliminarla
+			// Si la fila no estaba activa, agregar la clase 'active' y obtener el código del suministrador; de lo contrario, eliminarla
 			if (!isActive) {
 				tr.classList.add('active');
 				codSuministrador = tr.querySelector('td').textContent;
@@ -166,66 +194,70 @@
 
 		}
 	});
+	
+	$detailsSumButton.addEventListener('click', () => {
 
+				if (codSuministrador) {
+					window.location.href = `/suministradores/detalles/${encodeURIComponent(codSuministrador)}`;
+				} else {
+					alert("Por favor, seleccione un suministrador");
+				}
+
+			});
+	
 	$updateSumButton.addEventListener('click', () => {
 
 		if (codSuministrador) {
 			window.location.href = `/suministradores/editar?codSuministrador=${encodeURIComponent(codSuministrador)}`;
 		} else {
-			alert("Por favor, seleccione un requerimiento");
-		}
-
-	});
-
-	$detailsSumButton.addEventListener('click', () => {
-
-		if (codSuministrador) {
-			alert("Still under development 🤖")
-			/*window.location.href = `/suministradores/detalles?codSuministrador=${encodeURIComponent(codSuministrador)}`;*/
-		} else {
 			alert("Por favor, seleccione un suministrador");
 		}
 
 	});
-
+	
 	$deleteSumButton.addEventListener('click', () => {
-		if (codSuministrador) {
-			if (confirm('Eliminar permanentemente este suministrador?')) {
-				fetch(`/suministradores/eliminar?codSuministrador=${encodeURIComponent(codSuministrador)}`, {
-					method: 'DELETE',
-				})
-				.then(response => {
-					if(response.ok){
-						alert('Suministrador Eliminado con éxito');
-						location.reload();
-					}else{
-						alert('Error al eliminar el suministrador');
-					}
-				})
-				.catch(error =>{
-					console.error('Error', error);
-					alert('Hubo un problema con la solicitud de Eliminación.');
-				});
-			} 
-		}else {
-		        alert("Por favor, seleccione un suministrador");
-		} 
-
+	    if (codSuministrador) {
+	        if (confirm('Eliminar permanentemente este suministrador?')) {
+	            const csrfToken = document.querySelector('input[name="_csrf"]').value; // Obtener el token CSRF
+	            
+	            fetch(`/suministradores/eliminar?codSuministrador=${encodeURIComponent(codSuministrador)}`, {
+	                method: 'DELETE',
+	                headers: {
+	                    'X-CSRF-TOKEN': csrfToken, // Asegúrate de incluir el token CSRF
+	                },
+	            })
+	            .then(response => {
+	                if (response.ok) {
+	                    alert('Suministrador eliminado con éxito');
+	                    location.reload();
+	                } else {
+	                    alert('Error al eliminar el suministrador: ' + response.statusText);
+	                }
+	            })
+	            .catch(error => {
+	                console.error('Error en la solicitud:', error);
+	                alert('Hubo un problema con la solicitud de eliminación.');
+	            });
+	        }
+	    } else {
+	        alert("Por favor, seleccione un suministrador");
+	    }
 	});
-
+	
+	//Script table pagination
 	new DataTable('#tableSuministradores', {
-				layout: {
-					bottomEnd: {
-						paging: {
-							firstLast: false
-						}
-					}
-				},
-				lengthChange: false,
-				info: false
-			});
-
-		const searchInput = document.getElementById('dt-search-0');
+		layout: {
+			bottomEnd: {
+				paging: {
+					firstLast: false
+				}
+			}
+		},
+		lengthChange: false,
+		info: false
+	});
+	
+	const searchInput = document.getElementById('dt-search-0');
 		searchInput.classList.add('form-control');
 		searchInput.placeholder = 'Buscar...';
 
@@ -242,10 +274,48 @@
 		        label.remove();
 		    }
 		}
+		
+	//Manejar exportaciones y mostrar mensaje de éxito		
+	function exportar(formato) {
 
-		$('#keySearch').addEventListener('keyup', function() {
-		    table.search(this.value);
-		});
+		fetch(`/suministradores/exportar/${formato}`)
+		.then(response => {
+			if (response.ok) {
+				return response.blob();
+			}
+			throw new Error('Error al exportar');
+				})
+				.then(blob => {
+					const url = window.URL.createObjectURL(blob);
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = `reporte_suministradores.${formato === 'excel' ? 'xlsx' : formato === 'csv' ? 'csv' : formato === 'doc' ? 'docx' : 'pdf'}`;
+					document.body.appendChild(a);
+					a.click();
+					a.remove();
+
+					document.getElementById('mensaje').style.display = 'block';
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+			}
+			
+		
+</script>
+
+<script>
+  window.watsonAssistantChatOptions = {
+    integrationID: "e4358935-5408-4c31-bbda-d1a2cb625bb9", // The ID of this integration.
+    region: "us-south", // The region your integration is hosted in.
+    serviceInstanceID: "ffdf317e-bf21-46ea-bfe0-6771e07498dc", // The ID of your service instance.
+    onLoad: async (instance) => { await instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
 </script>
 
 </html>

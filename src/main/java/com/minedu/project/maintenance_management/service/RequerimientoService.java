@@ -7,21 +7,16 @@ import com.minedu.project.maintenance_management.model.Requerimiento;
 import com.minedu.project.maintenance_management.model.Solicitud;
 import com.minedu.project.maintenance_management.repository.RequerimientoRepository;
 import com.minedu.project.maintenance_management.repository.SolicitudRepository;
-import com.minedu.project.maintenance_management.repository.SuministradorRepository;
 
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
 
 @Service
 public class RequerimientoService {
-	
-	@Autowired
-	private SuministradorRepository sumRepo;
 	
 	@Autowired
 	private SolicitudRepository solRepo;
